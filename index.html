@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Creative Platform</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path d="M14 2L26 8v12l-12 6L2 20V8l12-6z" fill="url(#logoGrad)" opacity="0.9"/>
+          <path d="M14 6l8 4v8l-8 4-8-4v-8l8-4z" fill="#0a0a0f" opacity="0.6"/>
+          <path d="M14 10l4 2v4l-4 2-4-2v-4l4-2z" fill="url(#logoGrad2)"/>
+          <defs>
+            <linearGradient id="logoGrad" x1="2" y1="2" x2="26" y2="26">
+              <stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/>
+            </linearGradient>
+            <linearGradient id="logoGrad2" x1="10" y1="10" x2="18" y2="18">
+              <stop stop-color="#818cf8"/><stop offset="1" stop-color="#a78bfa"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <span class="logo-text">AI Creative</span>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">MAIN</div>
+      <a class="nav-item active" data-page="home" onclick="switchPage('home')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/></svg>
+        <span>创作中心</span>
+      </a>
+      <a class="nav-item" data-page="agents" onclick="switchPage('agents')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <span>Agent 市场</span>
+      </a>
+      <a class="nav-item" data-page="workflows" onclick="switchPage('workflows')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <span>Workflow</span>
+      </a>
+      <a class="nav-item" data-page="memory" onclick="switchPage('memory')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        <span>Memory</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">CONTENT</div>
+      <a class="nav-item" data-page="projects" onclick="switchPage('projects')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <span>我的项目</span>
+      </a>
+      <a class="nav-item" data-page="assets" onclick="switchPage('assets')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span>素材库</span>
+      </a>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="user-avatar">T</div>
+      <div class="user-info">
+        <div class="user-name">Tian</div>
+        <div class="user-plan">Pro Plan</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- Page: Home / 创作中心 -->
+    <div class="page active" id="page-home">
+      <div class="home-container">
+        <!-- Hero Intent Input -->
+        <div class="hero-section">
+          <h1 class="hero-title">
+            <span class="gradient-text">你想创作什么?</span>
+          </h1>
+          <p class="hero-subtitle">描述你的创意意图, AI Agent 会自动完成从脚本到成片的全部流程</p>
+
+          <div class="intent-box">
+            <div class="intent-input-wrapper">
+              <textarea class="intent-input" id="intentInput" placeholder="例如: 帮我做一个咖啡品牌的探店视频, 风格偏日系治愈, 时长30秒..." rows="3"></textarea>
+              <div class="intent-actions">
+                <div class="intent-tags">
+                  <button class="intent-tag" onclick="setIntent('做一个餐厅探店视频, 突出环境氛围和招牌菜')">🍜 探店视频</button>
+                  <button class="intent-tag" onclick="setIntent('生成一个电子产品开箱广告, 科技感强, 15秒')">📦 商品广告</button>
+                  <button class="intent-tag" onclick="setIntent('制作一条品牌宣传片, 大气简约, 展示公司文化')">🎬 品牌宣传</button>
+                  <button class="intent-tag" onclick="setIntent('做一个旅行vlog, 东南亚海岛风格, 配轻音乐')">✈️ 旅行Vlog</button>
+                </div>
+                <button class="intent-submit" id="intentSubmit" onclick="submitIntent()">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                  开始创作
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Intent Processing (hidden by default) -->
+        <div class="processing-section" id="processingSection" style="display:none">
+          <div class="process-header">
+            <h2>正在创作中...</h2>
+            <div class="process-intent-text" id="processIntentText"></div>
+          </div>
+
+          <div class="pipeline-flow">
+            <div class="pipeline-step" id="step-intent">
+              <div class="step-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              </div>
+              <div class="step-info">
+                <div class="step-title">意图解析</div>
+                <div class="step-desc">理解创作需求, 拆解任务</div>
+              </div>
+              <div class="step-status pending">等待中</div>
+            </div>
+            <div class="pipeline-connector"></div>
+
+            <div class="pipeline-step" id="step-agent">
+              <div class="step-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+              </div>
+              <div class="step-info">
+                <div class="step-title">Agent 调度</div>
+                <div class="step-desc">匹配最佳生产 Agent</div>
+              </div>
+              <div class="step-status pending">等待中</div>
+            </div>
+            <div class="pipeline-connector"></div>
+
+            <div class="pipeline-step" id="step-script">
+              <div class="step-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div class="step-info">
+                <div class="step-title">脚本生成</div>
+                <div class="step-desc">Script Skill 生成脚本</div>
+              </div>
+              <div class="step-status pending">等待中</div>
+            </div>
+            <div class="pipeline-connector"></div>
+
+            <div class="pipeline-step" id="step-shot">
+              <div class="step-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+              </div>
+              <div class="step-info">
+                <div class="step-title">镜头规划</div>
+                <div class="step-desc">Shot Skill 规划分镜</div>
+              </div>
+              <div class="step-status pending">等待中</div>
+            </div>
+            <div class="pipeline-connector"></div>
+
+            <div class="pipeline-step" id="step-generate">
+              <div class="step-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              </div>
+              <div class="step-info">
+                <div class="step-title">视频生成</div>
+                <div class="step-desc">Model Router 调度生成</div>
+              </div>
+              <div class="step-status pending">等待中</div>
+            </div>
+            <div class="pipeline-connector"></div>
+
+            <div class="pipeline-step" id="step-edit">
+              <div class="step-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              </div>
+              <div class="step-info">
+                <div class="step-title">剪辑配音</div>
+                <div class="step-desc">Edit Skill + Music Skill</div>
+              </div>
+              <div class="step-status pending">等待中</div>
+            </div>
+          </div>
+
+          <!-- Model Router Info -->
+          <div class="router-panel" id="routerPanel" style="display:none">
+            <div class="router-title">Model Router 调度详情</div>
+            <div class="router-models">
+              <div class="model-chip">
+                <span class="model-dot" style="background:#6366f1"></span>
+                <span>Kling 3.0</span>
+                <span class="model-task">视频生成</span>
+              </div>
+              <div class="model-chip">
+                <span class="model-dot" style="background:#8b5cf6"></span>
+                <span>GPT-5.4</span>
+                <span class="model-task">脚本文案</span>
+              </div>
+              <div class="model-chip">
+                <span class="model-dot" style="background:#a78bfa"></span>
+                <span>ElevenLabs</span>
+                <span class="model-task">语音合成</span>
+              </div>
+              <div class="model-chip">
+                <span class="model-dot" style="background:#c4b5fd"></span>
+                <span>Suno v4</span>
+                <span class="model-task">背景音乐</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Result Preview -->
+          <div class="result-section" id="resultSection" style="display:none">
+            <div class="result-header">
+              <h3>创作完成</h3>
+              <div class="result-actions">
+                <button class="btn-secondary">重新生成</button>
+                <button class="btn-primary">导出视频</button>
+              </div>
+            </div>
+            <div class="result-preview">
+              <div class="video-placeholder">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <p>30s 探店视频 | 1080p | Kling 3.0</p>
+              </div>
+              <div class="result-details">
+                <div class="detail-card">
+                  <div class="detail-label">脚本</div>
+                  <div class="detail-content">
+                    <p class="script-preview">[开场] 阳光透过落地窗洒进店内...<br>[镜头2] 特写: 拉花咖啡, 蒸汽升腾...<br>[镜头3] 环境: 木质桌椅, 绿植点缀...<br>[结尾] 品牌Logo + slogan淡入</p>
+                  </div>
+                </div>
+                <div class="detail-card">
+                  <div class="detail-label">分镜</div>
+                  <div class="storyboard-grid">
+                    <div class="storyboard-frame"><div class="frame-num">01</div><div class="frame-desc">全景 / 3s</div></div>
+                    <div class="storyboard-frame"><div class="frame-num">02</div><div class="frame-desc">特写 / 5s</div></div>
+                    <div class="storyboard-frame"><div class="frame-num">03</div><div class="frame-desc">环绕 / 8s</div></div>
+                    <div class="storyboard-frame"><div class="frame-num">04</div><div class="frame-desc">跟拍 / 6s</div></div>
+                    <div class="storyboard-frame"><div class="frame-num">05</div><div class="frame-desc">特写 / 4s</div></div>
+                    <div class="storyboard-frame"><div class="frame-num">06</div><div class="frame-desc">淡出 / 4s</div></div>
+                  </div>
+                </div>
+                <div class="detail-card">
+                  <div class="detail-label">Memory 沉淀</div>
+                  <div class="memory-items">
+                    <div class="memory-badge">🏷️ 日系治愈风格</div>
+                    <div class="memory-badge">🎵 轻音乐偏好</div>
+                    <div class="memory-badge">📐 30s短视频</div>
+                    <div class="memory-badge">☕ 咖啡品类</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stats-row" id="statsRow">
+          <div class="stat-card">
+            <div class="stat-number">12</div>
+            <div class="stat-label">已创作视频</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">5</div>
+            <div class="stat-label">Agent 可用</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">23</div>
+            <div class="stat-label">Workflow 模板</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">89</div>
+            <div class="stat-label">Memory 条目</div>
+          </div>
+        </div>
+
+        <!-- Recent Projects -->
+        <div class="section-header" id="recentHeader">
+          <h2>最近项目</h2>
+          <a href="#" class="view-all" onclick="switchPage('projects')">查看全部 →</a>
+        </div>
+        <div class="projects-grid" id="recentGrid">
+          <div class="project-card" onclick="switchPage('home')">
+            <div class="project-thumb"><div class="thumb-placeholder">🍜</div></div>
+            <div class="project-info">
+              <div class="project-title">老街火锅探店</div>
+              <div class="project-meta">Restaurant Agent · 30s · 2小时前</div>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-thumb"><div class="thumb-placeholder">📱</div></div>
+            <div class="project-info">
+              <div class="project-title">无线耳机开箱</div>
+              <div class="project-meta">Product Agent · 15s · 昨天</div>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-thumb"><div class="thumb-placeholder">✈️</div></div>
+            <div class="project-info">
+              <div class="project-title">巴厘岛3日游</div>
+              <div class="project-meta">Travel Agent · 60s · 3天前</div>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-thumb"><div class="thumb-placeholder">🎵</div></div>
+            <div class="project-info">
+              <div class="project-title">音乐节混剪</div>
+              <div class="project-meta">Event Agent · 45s · 5天前</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page: Agents -->
+    <div class="page" id="page-agents">
+      <div class="page-header">
+        <h1>Agent 市场</h1>
+        <p>选择专业 Agent, 一句话完成视频创作</p>
+      </div>
+
+      <div class="agent-filters">
+        <button class="filter-btn active">全部</button>
+        <button class="filter-btn">营销</button>
+        <button class="filter-btn">电商</button>
+        <button class="filter-btn">旅行</button>
+        <button class="filter-btn">教育</button>
+        <button class="filter-btn">社交</button>
+      </div>
+
+      <div class="agents-grid">
+        <div class="agent-card" onclick="openAgentDetail('restaurant')">
+          <div class="agent-icon">🍽️</div>
+          <div class="agent-name">Restaurant Marketing Agent</div>
+          <div class="agent-desc">探店视频, 菜品展示, 餐厅氛围宣传</div>
+          <div class="agent-meta">
+            <div class="agent-workflows">
+              <span class="workflow-count">4 Workflows</span>
+              <span class="skill-count">12 Skills</span>
+            </div>
+            <div class="agent-stats">
+              <span>⚡ 2.3k 次调用</span>
+            </div>
+          </div>
+          <div class="agent-models">
+            <span class="model-tag">Kling</span>
+            <span class="model-tag">GPT-5.4</span>
+            <span class="model-tag">ElevenLabs</span>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-icon">📦</div>
+          <div class="agent-name">Product Video Agent</div>
+          <div class="agent-desc">商品广告, 开箱测评, 卖点展示</div>
+          <div class="agent-meta">
+            <div class="agent-workflows">
+              <span class="workflow-count">6 Workflows</span>
+              <span class="skill-count">18 Skills</span>
+            </div>
+            <div class="agent-stats">
+              <span>⚡ 5.1k 次调用</span>
+            </div>
+          </div>
+          <div class="agent-models">
+            <span class="model-tag">Sora 2</span>
+            <span class="model-tag">Claude</span>
+            <span class="model-tag">Midjourney</span>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-icon">✈️</div>
+          <div class="agent-name">Travel Vlog Agent</div>
+          <div class="agent-desc">旅行记录, 目的地攻略, 风景展示</div>
+          <div class="agent-meta">
+            <div class="agent-workflows">
+              <span class="workflow-count">3 Workflows</span>
+              <span class="skill-count">9 Skills</span>
+            </div>
+            <div class="agent-stats">
+              <span>⚡ 1.8k 次调用</span>
+            </div>
+          </div>
+          <div class="agent-models">
+            <span class="model-tag">Veo 3.1</span>
+            <span class="model-tag">GPT-5.4</span>
+            <span class="model-tag">Suno</span>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-icon">🎓</div>
+          <div class="agent-name">Education Content Agent</div>
+          <div class="agent-desc">知识讲解, 课程片段, 教学动画</div>
+          <div class="agent-meta">
+            <div class="agent-workflows">
+              <span class="workflow-count">5 Workflows</span>
+              <span class="skill-count">15 Skills</span>
+            </div>
+            <div class="agent-stats">
+              <span>⚡ 890 次调用</span>
+            </div>
+          </div>
+          <div class="agent-models">
+            <span class="model-tag">Kling</span>
+            <span class="model-tag">Claude</span>
+            <span class="model-tag">D-ID</span>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-icon">🏢</div>
+          <div class="agent-name">Brand Story Agent</div>
+          <div class="agent-desc">品牌宣传片, 企业文化展示, 年度回顾</div>
+          <div class="agent-meta">
+            <div class="agent-workflows">
+              <span class="workflow-count">4 Workflows</span>
+              <span class="skill-count">14 Skills</span>
+            </div>
+            <div class="agent-stats">
+              <span>⚡ 1.2k 次调用</span>
+            </div>
+          </div>
+          <div class="agent-models">
+            <span class="model-tag">Runway</span>
+            <span class="model-tag">GPT-5.4</span>
+            <span class="model-tag">ElevenLabs</span>
+          </div>
+        </div>
+
+        <div class="agent-card agent-card-create">
+          <div class="agent-icon">+</div>
+          <div class="agent-name">创建自定义 Agent</div>
+          <div class="agent-desc">组合 Workflow 和 Skill, 打造专属生产能力</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page: Workflows -->
+    <div class="page" id="page-workflows">
+      <div class="page-header">
+        <h1>Workflow & Skill</h1>
+        <p>平台核心资产: 创作者沉淀的生产能力</p>
+      </div>
+
+      <div class="wf-tabs">
+        <button class="wf-tab active" onclick="switchWfTab(this, 'workflows')">Workflows</button>
+        <button class="wf-tab" onclick="switchWfTab(this, 'skills')">Skills</button>
+      </div>
+
+      <!-- Workflows List -->
+      <div class="wf-content active" id="wf-workflows">
+        <div class="wf-grid">
+          <div class="wf-card">
+            <div class="wf-header">
+              <div class="wf-title">商品广告全流程</div>
+              <span class="wf-badge">Official</span>
+            </div>
+            <div class="wf-pipeline">
+              <span class="wf-node">商品信息</span>
+              <span class="wf-arrow">→</span>
+              <span class="wf-node">卖点生成</span>
+              <span class="wf-arrow">→</span>
+              <span class="wf-node">脚本</span>
+              <span class="wf-arrow">→</span>
+              <span class="wf-node">镜头</span>
+              <span class="wf-arrow">→</span>
+              <span class="wf-node">生成</span>
+            </div>
+            <div class="wf-meta">
+              <span>By 官方</span>
+              <span>3.2k 次使用</span>
+              <span>6 Steps</span>
+            </div>
+          </div>
+
+          <div class="wf-card">
+            <div class="wf-header">
+              <div class="wf-title">探店视频模板</div>
+              <span class="wf-badge community">Community</span>
+            </div>
+            <div class="wf-pipeline">
+              <span class="wf-node">店铺信息</span>
+              <span class="wf-arrow">→</span>
+              <span class="wf-node">亮点提炼</span>
+              <span class="wf-arrow">→</span>
+              <span class="wf-node">脚本</span>
+              <span class="wf-arrow">→</span>
+              <span class="wf-node">拍摄指导</span>
+              <span class="wf-arrow">→</span>
+              <span class="wf-node">成片</span>
+            </div>
+            <div class="wf-meta">
+              <span>By @creator_wang</span>
+              <span>1.8k 次使用</span>
+              <span>5 Steps</span>
+            </div>
+          </div>
+
+          <div class="wf-card">
+            <div class="wf-header">
+              <div class="wf-title">品牌宣传片</div>
+              <span class="wf-badge">Official</span>
+            </div>
+            <div class="wf-pipeline">
+              <span class="wf-node">品牌资料</span>
+              <span class="wf-arrow">→</span>
+              <span class="wf-node">叙事结构</span>
+              <span class="wf-arrow">→</span>
+              <span class="wf-node">脚本</span>
+              <span class="wf-arrow">→</span>
+              <span class="wf-node">视觉</span>
+              <span class="wf-arrow">→</span>
+              <span class="wf-node">配音配乐</span>
+              <span class="wf-arrow">→</span>
+              <span class="wf-node">成片</span>
+            </div>
+            <div class="wf-meta">
+              <span>By 官方</span>
+              <span>2.5k 次使用</span>
+              <span>7 Steps</span>
+            </div>
+          </div>
+
+          <div class="wf-card">
+            <div class="wf-header">
+              <div class="wf-title">旅行Vlog快剪</div>
+              <span class="wf-badge community">Community</span>
+            </div>
+            <div class="wf-pipeline">
+              <span class="wf-node">目的地</span>
+              <span class="wf-arrow">→</span>
+              <span class="wf-node">行程线索</span>
+              <span class="wf-arrow">→</span>
+              <span class="wf-node">镜头</span>
+              <span class="wf-arrow">→</span>
+              <span class="wf-node">生成+配乐</span>
+            </div>
+            <div class="wf-meta">
+              <span>By @travel_li</span>
+              <span>950 次使用</span>
+              <span>4 Steps</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills List -->
+      <div class="wf-content" id="wf-skills">
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-icon">📝</div>
+            <div class="skill-name">Script Skill</div>
+            <div class="skill-desc">广告脚本生成, 支持多种风格和时长</div>
+            <div class="skill-models">GPT-5.4 / Claude</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon">🎬</div>
+            <div class="skill-name">Shot Skill</div>
+            <div class="skill-desc">智能镜头规划, 自动生成分镜表</div>
+            <div class="skill-models">GPT-5.4 / Claude</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon">✂️</div>
+            <div class="skill-name">Edit Skill</div>
+            <div class="skill-desc">剪辑节奏控制, 转场效果匹配</div>
+            <div class="skill-models">Internal</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon">🎵</div>
+            <div class="skill-name">Music Skill</div>
+            <div class="skill-desc">音乐风格匹配, 节奏同步</div>
+            <div class="skill-models">Suno v4 / Udio</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon">🗣️</div>
+            <div class="skill-name">Voice Skill</div>
+            <div class="skill-desc">多语言配音, 情感语调控制</div>
+            <div class="skill-models">ElevenLabs / Murf</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon">🖼️</div>
+            <div class="skill-name">Image Skill</div>
+            <div class="skill-desc">封面生成, 缩略图, 品牌视觉</div>
+            <div class="skill-models">SD3 / Midjourney</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon">💬</div>
+            <div class="skill-name">Caption Skill</div>
+            <div class="skill-desc">字幕生成, 多语言翻译, 排版</div>
+            <div class="skill-models">Whisper / GPT</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon">📊</div>
+            <div class="skill-name">Analytics Skill</div>
+            <div class="skill-desc">内容分析, 趋势匹配, 优化建议</div>
+            <div class="skill-models">Internal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page: Memory -->
+    <div class="page" id="page-memory">
+      <div class="page-header">
+        <h1>Memory System</h1>
+        <p>系统的长期上下文, Agent 执行时读取记忆</p>
+      </div>
+
+      <div class="memory-grid">
+        <div class="memory-section">
+          <div class="memory-section-header">
+            <div class="memory-type-icon">👤</div>
+            <div>
+              <h3>Identity Memory</h3>
+              <p>用户 / 品牌信息</p>
+            </div>
+          </div>
+          <div class="memory-entries">
+            <div class="memory-entry">
+              <div class="entry-key">品牌名称</div>
+              <div class="entry-value">Morning Brew Coffee</div>
+            </div>
+            <div class="memory-entry">
+              <div class="entry-key">品牌调性</div>
+              <div class="entry-value">温暖, 日系, 治愈感</div>
+            </div>
+            <div class="memory-entry">
+              <div class="entry-key">目标受众</div>
+              <div class="entry-value">20-35岁, 城市白领, 咖啡爱好者</div>
+            </div>
+            <div class="memory-entry">
+              <div class="entry-key">品牌色</div>
+              <div class="entry-value">
+                <span class="color-dot" style="background:#D4A574"></span> #D4A574
+                <span class="color-dot" style="background:#8B6914"></span> #8B6914
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="memory-section">
+          <div class="memory-section-header">
+            <div class="memory-type-icon">🎨</div>
+            <div>
+              <h3>Preference Memory</h3>
+              <p>审美 / 风格 / 节奏</p>
+            </div>
+          </div>
+          <div class="memory-entries">
+            <div class="memory-entry">
+              <div class="entry-key">视频风格</div>
+              <div class="entry-value">日系治愈, 暖色调, 自然光</div>
+            </div>
+            <div class="memory-entry">
+              <div class="entry-key">剪辑节奏</div>
+              <div class="entry-value">慢节奏, 3-5秒/镜头, 柔和转场</div>
+            </div>
+            <div class="memory-entry">
+              <div class="entry-key">音乐偏好</div>
+              <div class="entry-value">轻音乐, 原声吉他, Lo-fi</div>
+            </div>
+            <div class="memory-entry">
+              <div class="entry-key">字幕风格</div>
+              <div class="entry-value">简约白色, 无衬线体, 底部居中</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="memory-section">
+          <div class="memory-section-header">
+            <div class="memory-type-icon">📁</div>
+            <div>
+              <h3>Asset Memory</h3>
+              <p>产品素材 / 视频素材</p>
+            </div>
+          </div>
+          <div class="memory-entries">
+            <div class="memory-entry">
+              <div class="entry-key">Logo</div>
+              <div class="entry-value">logo_main.svg, logo_white.svg</div>
+            </div>
+            <div class="memory-entry">
+              <div class="entry-key">品牌字体</div>
+              <div class="entry-value">Noto Sans JP, Inter</div>
+            </div>
+            <div class="memory-entry">
+              <div class="entry-key">常用素材</div>
+              <div class="entry-value">咖啡豆特写 x12, 店内环境 x8, 拉花 x6</div>
+            </div>
+            <div class="memory-entry">
+              <div class="entry-key">历史成片</div>
+              <div class="entry-value">12 个视频, 最佳: 探店系列#3 (89%好评)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="memory-insight">
+        <div class="insight-header">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <span>Memory 沉淀效果</span>
+        </div>
+        <p>基于 89 条 Memory, 你的视频生成一致性提升了 <strong>67%</strong>, 平均减少 <strong>2.3 次</strong>重新生成</p>
+      </div>
+    </div>
+
+    <!-- Page: Projects -->
+    <div class="page" id="page-projects">
+      <div class="page-header">
+        <h1>我的项目</h1>
+        <p>全部创作记录</p>
+      </div>
+      <div class="projects-list">
+        <div class="project-list-item">
+          <div class="project-list-thumb">🍜</div>
+          <div class="project-list-info">
+            <div class="project-list-title">老街火锅探店</div>
+            <div class="project-list-meta">Restaurant Agent · 探店视频模板</div>
+          </div>
+          <div class="project-list-time">2小时前</div>
+          <div class="project-list-status done">完成</div>
+        </div>
+        <div class="project-list-item">
+          <div class="project-list-thumb">📱</div>
+          <div class="project-list-info">
+            <div class="project-list-title">无线耳机开箱</div>
+            <div class="project-list-meta">Product Agent · 商品广告全流程</div>
+          </div>
+          <div class="project-list-time">昨天</div>
+          <div class="project-list-status done">完成</div>
+        </div>
+        <div class="project-list-item">
+          <div class="project-list-thumb">✈️</div>
+          <div class="project-list-info">
+            <div class="project-list-title">巴厘岛3日游</div>
+            <div class="project-list-meta">Travel Agent · 旅行Vlog快剪</div>
+          </div>
+          <div class="project-list-time">3天前</div>
+          <div class="project-list-status done">完成</div>
+        </div>
+        <div class="project-list-item">
+          <div class="project-list-thumb">🎵</div>
+          <div class="project-list-info">
+            <div class="project-list-title">音乐节混剪</div>
+            <div class="project-list-meta">Event Agent · 自定义Workflow</div>
+          </div>
+          <div class="project-list-time">5天前</div>
+          <div class="project-list-status done">完成</div>
+        </div>
+        <div class="project-list-item">
+          <div class="project-list-thumb">🏢</div>
+          <div class="project-list-info">
+            <div class="project-list-title">Q1品牌回顾</div>
+            <div class="project-list-meta">Brand Agent · 品牌宣传片</div>
+          </div>
+          <div class="project-list-time">1周前</div>
+          <div class="project-list-status done">完成</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page: Assets -->
+    <div class="page" id="page-assets">
+      <div class="page-header">
+        <h1>素材库</h1>
+        <p>品牌素材, 产品图片, 视频片段</p>
+      </div>
+      <div class="assets-grid">
+        <div class="asset-card"><div class="asset-preview">☕</div><div class="asset-name">咖啡豆特写.jpg</div></div>
+        <div class="asset-card"><div class="asset-preview">🏠</div><div class="asset-name">店内环境01.mp4</div></div>
+        <div class="asset-card"><div class="asset-preview">🎨</div><div class="asset-name">品牌Logo.svg</div></div>
+        <div class="asset-card"><div class="asset-preview">🍰</div><div class="asset-name">甜品展示.jpg</div></div>
+        <div class="asset-card"><div class="asset-preview">📐</div><div class="asset-name">品牌色板.png</div></div>
+        <div class="asset-card upload-card">
+          <div class="asset-preview">+</div>
+          <div class="asset-name">上传素材</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
