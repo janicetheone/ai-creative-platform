@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Creative Platform - Creator Studio</title>
+  <link rel="stylesheet" href="creator-style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M14 2L26 8v12l-12 6L2 20V8l12-6z" fill="url(#lg1)" opacity="0.9"/>
+        <path d="M14 6l8 4v8l-8 4-8-4v-8l8-4z" fill="#0a0a0f" opacity="0.6"/>
+        <path d="M14 10l4 2v4l-4 2-4-2v-4l4-2z" fill="url(#lg2)"/>
+        <defs>
+          <linearGradient id="lg1" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#ef4444"/></linearGradient>
+          <linearGradient id="lg2" x1="10" y1="10" x2="18" y2="18"><stop stop-color="#fbbf24"/><stop offset="1" stop-color="#f97316"/></linearGradient>
+        </defs>
+      </svg>
+      <span class="logo-text">Creator Studio</span>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">OVERVIEW</div>
+      <a class="nav-item active" data-page="dashboard" onclick="switchPage('dashboard')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span>数据看板</span>
+      </a>
+      <a class="nav-item" data-page="earnings" onclick="switchPage('earnings')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        <span>收益中心</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">CREATE</div>
+      <a class="nav-item" data-page="my-agents" onclick="switchPage('my-agents')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <span>我的 Agent</span>
+      </a>
+      <a class="nav-item" data-page="my-workflows" onclick="switchPage('my-workflows')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <span>我的 Workflow</span>
+      </a>
+      <a class="nav-item" data-page="my-skills" onclick="switchPage('my-skills')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span>我的 Skill</span>
+      </a>
+      <a class="nav-item" data-page="workflow-editor" onclick="switchPage('workflow-editor')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        <span>Workflow 编辑器</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">ANALYTICS</div>
+      <a class="nav-item" data-page="analytics" onclick="switchPage('analytics')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span>调用分析</span>
+      </a>
+      <a class="nav-item" data-page="feedback" onclick="switchPage('feedback')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+        <span>用户反馈</span>
+      </a>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="user-avatar creator">C</div>
+      <div class="user-info">
+        <div class="user-name">Creator Wang</div>
+        <div class="user-plan">
+          <span class="creator-badge">认证创作者</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- ==================== Dashboard ==================== -->
+    <div class="page active" id="page-dashboard">
+      <div class="page-top-bar">
+        <div>
+          <h1>数据看板</h1>
+          <p class="page-desc">欢迎回来, Creator Wang. 这是你的创作概览.</p>
+        </div>
+        <div class="top-actions">
+          <select class="time-select">
+            <option>过去 7 天</option>
+            <option selected>过去 30 天</option>
+            <option>过去 90 天</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- KPI Cards -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-label">总调用次数</span>
+            <span class="kpi-trend up">+23%</span>
+          </div>
+          <div class="kpi-value">12,847</div>
+          <div class="kpi-sparkline">
+            <svg viewBox="0 0 120 30" preserveAspectRatio="none">
+              <polyline fill="none" stroke="#6366f1" stroke-width="2" points="0,25 10,22 20,18 30,20 40,15 50,12 60,14 70,8 80,10 90,6 100,8 110,4 120,2"/>
+              <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#6366f1" stop-opacity="0.3"/>
+                <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+              </linearGradient>
+              <polygon fill="url(#sparkGrad)" points="0,25 10,22 20,18 30,20 40,15 50,12 60,14 70,8 80,10 90,6 100,8 110,4 120,2 120,30 0,30"/>
+            </svg>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-label">总收益</span>
+            <span class="kpi-trend up">+18%</span>
+          </div>
+          <div class="kpi-value">$4,231</div>
+          <div class="kpi-sub">本月: $1,290</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-label">活跃用户</span>
+            <span class="kpi-trend up">+31%</span>
+          </div>
+          <div class="kpi-value">3,482</div>
+          <div class="kpi-sub">使用你的 Agent/Workflow</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-label">平均评分</span>
+            <span class="kpi-trend neutral">-</span>
+          </div>
+          <div class="kpi-value">4.8<span class="kpi-unit">/5</span></div>
+          <div class="kpi-stars">★★★★★</div>
+        </div>
+      </div>
+
+      <!-- Charts Row -->
+      <div class="charts-row">
+        <div class="chart-card wide">
+          <div class="chart-header">
+            <h3>调用趋势</h3>
+            <div class="chart-legend">
+              <span class="legend-dot" style="background:#6366f1"></span> Agent
+              <span class="legend-dot" style="background:#8b5cf6"></span> Workflow
+              <span class="legend-dot" style="background:#a78bfa"></span> Skill
+            </div>
+          </div>
+          <div class="chart-area">
+            <svg viewBox="0 0 700 200" preserveAspectRatio="none" class="line-chart">
+              <!-- Grid -->
+              <line x1="0" y1="50" x2="700" y2="50" stroke="#1a1a24" stroke-width="1"/>
+              <line x1="0" y1="100" x2="700" y2="100" stroke="#1a1a24" stroke-width="1"/>
+              <line x1="0" y1="150" x2="700" y2="150" stroke="#1a1a24" stroke-width="1"/>
+              <!-- Agent line -->
+              <polyline fill="none" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                points="0,160 25,155 50,140 75,145 100,130 125,120 150,125 175,110 200,100 225,105 250,90 275,85 300,80 325,75 350,70 375,65 400,60 425,55 450,50 475,55 500,45 525,40 550,35 575,30 600,25 625,22 650,18 675,15 700,12"/>
+              <!-- Workflow line -->
+              <polyline fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                points="0,170 25,168 50,160 75,165 100,155 125,150 150,148 175,140 200,135 225,138 250,130 275,125 300,120 325,118 350,112 375,108 400,100 425,95 450,90 475,92 500,85 525,80 550,75 575,72 600,68 625,65 650,60 675,58 700,55"/>
+              <!-- Skill line -->
+              <polyline fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 3"
+                points="0,180 25,178 50,175 75,177 100,172 125,168 150,170 175,165 200,160 225,162 250,155 275,152 300,148 325,145 350,140 375,138 400,132 425,128 450,125 475,127 500,120 525,118 550,112 575,110 600,105 625,102 650,98 675,95 700,92"/>
+              <!-- X axis labels -->
+              <text x="0" y="195" fill="#555570" font-size="10">3/1</text>
+              <text x="175" y="195" fill="#555570" font-size="10">3/8</text>
+              <text x="350" y="195" fill="#555570" font-size="10">3/15</text>
+              <text x="525" y="195" fill="#555570" font-size="10">3/22</text>
+              <text x="680" y="195" fill="#555570" font-size="10">3/30</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3>资产分布</h3>
+          </div>
+          <div class="donut-chart">
+            <svg viewBox="0 0 160 160">
+              <circle cx="80" cy="80" r="60" fill="none" stroke="#1a1a24" stroke-width="20"/>
+              <circle cx="80" cy="80" r="60" fill="none" stroke="#6366f1" stroke-width="20" stroke-dasharray="150 227" stroke-dashoffset="0" transform="rotate(-90 80 80)"/>
+              <circle cx="80" cy="80" r="60" fill="none" stroke="#8b5cf6" stroke-width="20" stroke-dasharray="100 277" stroke-dashoffset="-150" transform="rotate(-90 80 80)"/>
+              <circle cx="80" cy="80" r="60" fill="none" stroke="#a78bfa" stroke-width="20" stroke-dasharray="70 307" stroke-dashoffset="-250" transform="rotate(-90 80 80)"/>
+              <text x="80" y="75" text-anchor="middle" fill="#e8e8f0" font-size="20" font-weight="700">15</text>
+              <text x="80" y="92" text-anchor="middle" fill="#555570" font-size="10">总资产</text>
+            </svg>
+            <div class="donut-legend">
+              <div><span class="legend-dot" style="background:#6366f1"></span> 3 Agent</div>
+              <div><span class="legend-dot" style="background:#8b5cf6"></span> 5 Workflow</div>
+              <div><span class="legend-dot" style="background:#a78bfa"></span> 7 Skill</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Performing -->
+      <div class="section-title">热门资产 Top 5</div>
+      <div class="top-table">
+        <div class="table-header">
+          <span class="col-rank">#</span>
+          <span class="col-name">资产名称</span>
+          <span class="col-type">类型</span>
+          <span class="col-calls">调用次数</span>
+          <span class="col-revenue">收益</span>
+          <span class="col-rating">评分</span>
+          <span class="col-trend">趋势</span>
+        </div>
+        <div class="table-row">
+          <span class="col-rank">1</span>
+          <span class="col-name">Restaurant Marketing Agent</span>
+          <span class="col-type"><span class="type-badge agent">Agent</span></span>
+          <span class="col-calls">5,120</span>
+          <span class="col-revenue">$1,842</span>
+          <span class="col-rating">4.9 ★</span>
+          <span class="col-trend"><span class="trend-up">↑ 28%</span></span>
+        </div>
+        <div class="table-row">
+          <span class="col-rank">2</span>
+          <span class="col-name">商品广告全流程</span>
+          <span class="col-type"><span class="type-badge workflow">Workflow</span></span>
+          <span class="col-calls">3,210</span>
+          <span class="col-revenue">$986</span>
+          <span class="col-rating">4.8 ★</span>
+          <span class="col-trend"><span class="trend-up">↑ 15%</span></span>
+        </div>
+        <div class="table-row">
+          <span class="col-rank">3</span>
+          <span class="col-name">探店视频模板</span>
+          <span class="col-type"><span class="type-badge workflow">Workflow</span></span>
+          <span class="col-calls">1,842</span>
+          <span class="col-revenue">$564</span>
+          <span class="col-rating">4.7 ★</span>
+          <span class="col-trend"><span class="trend-up">↑ 42%</span></span>
+        </div>
+        <div class="table-row">
+          <span class="col-rank">4</span>
+          <span class="col-name">Script Skill Pro</span>
+          <span class="col-type"><span class="type-badge skill">Skill</span></span>
+          <span class="col-calls">1,430</span>
+          <span class="col-revenue">$421</span>
+          <span class="col-rating">4.8 ★</span>
+          <span class="col-trend"><span class="trend-neutral">- 2%</span></span>
+        </div>
+        <div class="table-row">
+          <span class="col-rank">5</span>
+          <span class="col-name">Product Video Agent</span>
+          <span class="col-type"><span class="type-badge agent">Agent</span></span>
+          <span class="col-calls">1,245</span>
+          <span class="col-revenue">$418</span>
+          <span class="col-rating">4.6 ★</span>
+          <span class="col-trend"><span class="trend-up">↑ 8%</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== Earnings ==================== -->
+    <div class="page" id="page-earnings">
+      <div class="page-top-bar">
+        <div>
+          <h1>收益中心</h1>
+          <p class="page-desc">Agent, Workflow, Skill 的调用收益明细</p>
+        </div>
+        <button class="btn-primary">提现</button>
+      </div>
+
+      <div class="earnings-overview">
+        <div class="earn-card main-earn">
+          <div class="earn-label">可提现余额</div>
+          <div class="earn-amount">$3,182.40</div>
+          <div class="earn-sub">累计收益: $4,231.00 | 已提现: $1,048.60</div>
+        </div>
+        <div class="earn-card">
+          <div class="earn-label">本月收益</div>
+          <div class="earn-amount small">$1,290</div>
+          <div class="earn-breakdown">
+            <div class="earn-row"><span>Agent 调用</span><span>$780</span></div>
+            <div class="earn-row"><span>Workflow 调用</span><span>$380</span></div>
+            <div class="earn-row"><span>Skill 调用</span><span>$130</span></div>
+          </div>
+        </div>
+        <div class="earn-card">
+          <div class="earn-label">收益构成</div>
+          <div class="earn-bars">
+            <div class="earn-bar-item">
+              <div class="bar-label">Agent</div>
+              <div class="bar-track"><div class="bar-fill agent-fill" style="width:60%"></div></div>
+              <div class="bar-pct">60%</div>
+            </div>
+            <div class="earn-bar-item">
+              <div class="bar-label">Workflow</div>
+              <div class="bar-track"><div class="bar-fill workflow-fill" style="width:30%"></div></div>
+              <div class="bar-pct">30%</div>
+            </div>
+            <div class="earn-bar-item">
+              <div class="bar-label">Skill</div>
+              <div class="bar-track"><div class="bar-fill skill-fill" style="width:10%"></div></div>
+              <div class="bar-pct">10%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">收益明细</div>
+      <div class="earnings-list">
+        <div class="earn-list-item">
+          <div class="earn-list-icon">🍽️</div>
+          <div class="earn-list-info">
+            <div class="earn-list-name">Restaurant Marketing Agent</div>
+            <div class="earn-list-meta">被用户 @foodie_mark 调用 · 探店视频</div>
+          </div>
+          <div class="earn-list-time">10分钟前</div>
+          <div class="earn-list-amount">+$0.35</div>
+        </div>
+        <div class="earn-list-item">
+          <div class="earn-list-icon">📦</div>
+          <div class="earn-list-info">
+            <div class="earn-list-name">商品广告全流程</div>
+            <div class="earn-list-meta">被用户 @shop_lily 调用 · 电商广告</div>
+          </div>
+          <div class="earn-list-time">25分钟前</div>
+          <div class="earn-list-amount">+$0.28</div>
+        </div>
+        <div class="earn-list-item">
+          <div class="earn-list-icon">📝</div>
+          <div class="earn-list-info">
+            <div class="earn-list-name">Script Skill Pro</div>
+            <div class="earn-list-meta">被 Brand Story Agent 调用 · 脚本生成</div>
+          </div>
+          <div class="earn-list-time">1小时前</div>
+          <div class="earn-list-amount">+$0.12</div>
+        </div>
+        <div class="earn-list-item">
+          <div class="earn-list-icon">🍽️</div>
+          <div class="earn-list-info">
+            <div class="earn-list-name">Restaurant Marketing Agent</div>
+            <div class="earn-list-meta">被用户 @travel_chen 调用 · 美食推荐</div>
+          </div>
+          <div class="earn-list-time">2小时前</div>
+          <div class="earn-list-amount">+$0.35</div>
+        </div>
+        <div class="earn-list-item">
+          <div class="earn-list-icon">🎬</div>
+          <div class="earn-list-info">
+            <div class="earn-list-name">探店视频模板</div>
+            <div class="earn-list-meta">被用户 @daily_eats 调用 · 日料探店</div>
+          </div>
+          <div class="earn-list-time">3小时前</div>
+          <div class="earn-list-amount">+$0.28</div>
+        </div>
+      </div>
+
+      <div class="pricing-info">
+        <div class="pricing-title">💡 收益规则</div>
+        <div class="pricing-rules">
+          <div class="rule-item">
+            <div class="rule-type">Agent 调用</div>
+            <div class="rule-price">$0.30 - $0.50 / 次</div>
+            <div class="rule-note">根据复杂度和模型成本浮动</div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-type">Workflow 调用</div>
+            <div class="rule-price">$0.20 - $0.35 / 次</div>
+            <div class="rule-note">平台抽成 20%, 创作者获得 80%</div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-type">Skill 调用</div>
+            <div class="rule-price">$0.08 - $0.15 / 次</div>
+            <div class="rule-note">被其他 Agent/Workflow 引用时触发</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== My Agents ==================== -->
+    <div class="page" id="page-my-agents">
+      <div class="page-top-bar">
+        <div>
+          <h1>我的 Agent</h1>
+          <p class="page-desc">管理你创建的 Agent, 配置 Workflow 和 Skill 组合</p>
+        </div>
+        <button class="btn-primary" onclick="switchPage('workflow-editor')">+ 创建 Agent</button>
+      </div>
+
+      <div class="my-agents-grid">
+        <!-- Agent Card Detailed -->
+        <div class="agent-detail-card">
+          <div class="adc-header">
+            <div class="adc-icon">🍽️</div>
+            <div class="adc-info">
+              <div class="adc-name">Restaurant Marketing Agent</div>
+              <div class="adc-status published">已发布</div>
+            </div>
+            <div class="adc-actions">
+              <button class="btn-icon" title="编辑">✏️</button>
+              <button class="btn-icon" title="分析">📊</button>
+              <button class="btn-icon" title="更多">⋯</button>
+            </div>
+          </div>
+          <div class="adc-desc">探店视频, 菜品展示, 餐厅氛围宣传. 支持日系/中式/西式多种风格.</div>
+          <div class="adc-composition">
+            <div class="comp-title">Agent 构成</div>
+            <div class="comp-tree">
+              <div class="comp-branch">
+                <div class="comp-label">Workflows (2)</div>
+                <div class="comp-items">
+                  <span class="comp-chip wf">探店视频模板</span>
+                  <span class="comp-chip wf">菜品展示流程</span>
+                </div>
+              </div>
+              <div class="comp-branch">
+                <div class="comp-label">Skills (5)</div>
+                <div class="comp-items">
+                  <span class="comp-chip sk">Script Skill</span>
+                  <span class="comp-chip sk">Shot Skill</span>
+                  <span class="comp-chip sk">Edit Skill</span>
+                  <span class="comp-chip sk">Music Skill</span>
+                  <span class="comp-chip sk">Voice Skill</span>
+                </div>
+              </div>
+              <div class="comp-branch">
+                <div class="comp-label">Models</div>
+                <div class="comp-items">
+                  <span class="comp-chip md">Kling 3.0</span>
+                  <span class="comp-chip md">GPT-5.4</span>
+                  <span class="comp-chip md">ElevenLabs</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="adc-stats">
+            <div class="adc-stat"><span class="adc-stat-num">5,120</span><span class="adc-stat-label">调用</span></div>
+            <div class="adc-stat"><span class="adc-stat-num">$1,842</span><span class="adc-stat-label">收益</span></div>
+            <div class="adc-stat"><span class="adc-stat-num">4.9</span><span class="adc-stat-label">评分</span></div>
+            <div class="adc-stat"><span class="adc-stat-num">892</span><span class="adc-stat-label">用户</span></div>
+          </div>
+        </div>
+
+        <div class="agent-detail-card">
+          <div class="adc-header">
+            <div class="adc-icon">📦</div>
+            <div class="adc-info">
+              <div class="adc-name">Product Video Agent</div>
+              <div class="adc-status published">已发布</div>
+            </div>
+            <div class="adc-actions">
+              <button class="btn-icon">✏️</button>
+              <button class="btn-icon">📊</button>
+              <button class="btn-icon">⋯</button>
+            </div>
+          </div>
+          <div class="adc-desc">商品广告, 开箱测评, 卖点展示. 适用于电商场景.</div>
+          <div class="adc-composition">
+            <div class="comp-title">Agent 构成</div>
+            <div class="comp-tree">
+              <div class="comp-branch">
+                <div class="comp-label">Workflows (3)</div>
+                <div class="comp-items">
+                  <span class="comp-chip wf">商品广告全流程</span>
+                  <span class="comp-chip wf">开箱测评模板</span>
+                  <span class="comp-chip wf">卖点对比模板</span>
+                </div>
+              </div>
+              <div class="comp-branch">
+                <div class="comp-label">Skills (6)</div>
+                <div class="comp-items">
+                  <span class="comp-chip sk">Script Skill</span>
+                  <span class="comp-chip sk">Shot Skill</span>
+                  <span class="comp-chip sk">Edit Skill</span>
+                  <span class="comp-chip sk">Music Skill</span>
+                  <span class="comp-chip sk">Caption Skill</span>
+                  <span class="comp-chip sk">Image Skill</span>
+                </div>
+              </div>
+              <div class="comp-branch">
+                <div class="comp-label">Models</div>
+                <div class="comp-items">
+                  <span class="comp-chip md">Sora 2</span>
+                  <span class="comp-chip md">Claude</span>
+                  <span class="comp-chip md">Midjourney</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="adc-stats">
+            <div class="adc-stat"><span class="adc-stat-num">1,245</span><span class="adc-stat-label">调用</span></div>
+            <div class="adc-stat"><span class="adc-stat-num">$418</span><span class="adc-stat-label">收益</span></div>
+            <div class="adc-stat"><span class="adc-stat-num">4.6</span><span class="adc-stat-label">评分</span></div>
+            <div class="adc-stat"><span class="adc-stat-num">320</span><span class="adc-stat-label">用户</span></div>
+          </div>
+        </div>
+
+        <div class="agent-detail-card draft-card">
+          <div class="adc-header">
+            <div class="adc-icon">🎓</div>
+            <div class="adc-info">
+              <div class="adc-name">Education Content Agent</div>
+              <div class="adc-status draft">草稿</div>
+            </div>
+            <div class="adc-actions">
+              <button class="btn-icon">✏️</button>
+              <button class="btn-icon">⋯</button>
+            </div>
+          </div>
+          <div class="adc-desc">知识讲解, 课程片段, 教学动画. 开发中...</div>
+          <div class="adc-composition">
+            <div class="comp-title">Agent 构成</div>
+            <div class="comp-tree">
+              <div class="comp-branch">
+                <div class="comp-label">Workflows (1)</div>
+                <div class="comp-items">
+                  <span class="comp-chip wf">知识讲解模板</span>
+                  <span class="comp-chip add">+ 添加</span>
+                </div>
+              </div>
+              <div class="comp-branch">
+                <div class="comp-label">Skills (3)</div>
+                <div class="comp-items">
+                  <span class="comp-chip sk">Script Skill</span>
+                  <span class="comp-chip sk">Voice Skill</span>
+                  <span class="comp-chip sk">Caption Skill</span>
+                  <span class="comp-chip add">+ 添加</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="draft-actions">
+            <button class="btn-secondary">继续编辑</button>
+            <button class="btn-primary">发布</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== My Workflows ==================== -->
+    <div class="page" id="page-my-workflows">
+      <div class="page-top-bar">
+        <div>
+          <h1>我的 Workflow</h1>
+          <p class="page-desc">完整生产流程, 可被 Agent 引用</p>
+        </div>
+        <button class="btn-primary" onclick="switchPage('workflow-editor')">+ 创建 Workflow</button>
+      </div>
+
+      <div class="wf-list">
+        <div class="wf-list-card">
+          <div class="wf-list-header">
+            <div class="wf-list-title">探店视频模板</div>
+            <div class="wf-list-badges">
+              <span class="status-badge published">已发布</span>
+              <span class="ref-badge">被 1 个 Agent 引用</span>
+            </div>
+          </div>
+          <div class="wf-list-flow">
+            <div class="flow-node"><div class="flow-node-icon">📝</div><div class="flow-node-text">店铺信息输入</div></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node"><div class="flow-node-icon">✨</div><div class="flow-node-text">亮点提炼</div><div class="flow-node-skill">Script Skill</div></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node"><div class="flow-node-icon">🎬</div><div class="flow-node-text">脚本生成</div><div class="flow-node-skill">Script Skill</div></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node"><div class="flow-node-icon">🖼️</div><div class="flow-node-text">分镜规划</div><div class="flow-node-skill">Shot Skill</div></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node"><div class="flow-node-icon">🎥</div><div class="flow-node-text">视频生成</div><div class="flow-node-skill">Kling 3.0</div></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node"><div class="flow-node-icon">✂️</div><div class="flow-node-text">剪辑配音</div><div class="flow-node-skill">Edit + Music</div></div>
+          </div>
+          <div class="wf-list-stats">
+            <span>1,842 次调用</span>
+            <span>$564 收益</span>
+            <span>4.7 ★</span>
+            <span>更新于 2天前</span>
+          </div>
+        </div>
+
+        <div class="wf-list-card">
+          <div class="wf-list-header">
+            <div class="wf-list-title">商品广告全流程</div>
+            <div class="wf-list-badges">
+              <span class="status-badge published">已发布</span>
+              <span class="ref-badge">被 1 个 Agent 引用</span>
+            </div>
+          </div>
+          <div class="wf-list-flow">
+            <div class="flow-node"><div class="flow-node-icon">📋</div><div class="flow-node-text">商品信息</div></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node"><div class="flow-node-icon">💡</div><div class="flow-node-text">卖点生成</div><div class="flow-node-skill">GPT-5.4</div></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node"><div class="flow-node-icon">📝</div><div class="flow-node-text">广告脚本</div><div class="flow-node-skill">Script Skill</div></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node"><div class="flow-node-icon">🎬</div><div class="flow-node-text">镜头规划</div><div class="flow-node-skill">Shot Skill</div></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node"><div class="flow-node-icon">🎥</div><div class="flow-node-text">视频生成</div><div class="flow-node-skill">Sora 2</div></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node"><div class="flow-node-icon">🎵</div><div class="flow-node-text">配音配乐</div><div class="flow-node-skill">Voice + Music</div></div>
+          </div>
+          <div class="wf-list-stats">
+            <span>3,210 次调用</span>
+            <span>$986 收益</span>
+            <span>4.8 ★</span>
+            <span>更新于 5天前</span>
+          </div>
+        </div>
+
+        <div class="wf-list-card">
+          <div class="wf-list-header">
+            <div class="wf-list-title">菜品展示流程</div>
+            <div class="wf-list-badges">
+              <span class="status-badge published">已发布</span>
+              <span class="ref-badge">被 1 个 Agent 引用</span>
+            </div>
+          </div>
+          <div class="wf-list-flow">
+            <div class="flow-node"><div class="flow-node-icon">🍜</div><div class="flow-node-text">菜品照片</div></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node"><div class="flow-node-icon">✨</div><div class="flow-node-text">美食文案</div><div class="flow-node-skill">Script Skill</div></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node"><div class="flow-node-icon">🎥</div><div class="flow-node-text">特写生成</div><div class="flow-node-skill">Kling 3.0</div></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node"><div class="flow-node-icon">✂️</div><div class="flow-node-text">组合剪辑</div><div class="flow-node-skill">Edit Skill</div></div>
+          </div>
+          <div class="wf-list-stats">
+            <span>890 次调用</span>
+            <span>$267 收益</span>
+            <span>4.5 ★</span>
+            <span>更新于 1周前</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== My Skills ==================== -->
+    <div class="page" id="page-my-skills">
+      <div class="page-top-bar">
+        <div>
+          <h1>我的 Skill</h1>
+          <p class="page-desc">原子能力单元, 可被 Workflow 和 Agent 引用</p>
+        </div>
+        <button class="btn-primary">+ 创建 Skill</button>
+      </div>
+
+      <div class="skills-list">
+        <div class="skill-detail-card">
+          <div class="skd-header">
+            <div class="skd-icon">📝</div>
+            <div class="skd-info">
+              <div class="skd-name">Script Skill Pro</div>
+              <div class="skd-type">原子能力 · 文案生成</div>
+            </div>
+            <div class="skd-status published">已发布</div>
+          </div>
+          <div class="skd-config">
+            <div class="config-item">
+              <span class="config-label">底层模型</span>
+              <span class="config-value">GPT-5.4 (primary) / Claude 4.6 (fallback)</span>
+            </div>
+            <div class="config-item">
+              <span class="config-label">Prompt 模板</span>
+              <span class="config-value">3 个场景模板 (广告/探店/品牌)</span>
+            </div>
+            <div class="config-item">
+              <span class="config-label">输入</span>
+              <span class="config-value">场景描述, 风格偏好, 时长</span>
+            </div>
+            <div class="config-item">
+              <span class="config-label">输出</span>
+              <span class="config-value">结构化脚本 (JSON)</span>
+            </div>
+          </div>
+          <div class="skd-refs">
+            <span class="ref-tag">被 2 个 Workflow 引用</span>
+            <span class="ref-tag">被 2 个 Agent 引用</span>
+          </div>
+          <div class="skd-stats">
+            <span>1,430 次调用</span>
+            <span>$421 收益</span>
+            <span>4.8 ★</span>
+          </div>
+        </div>
+
+        <div class="skill-detail-card">
+          <div class="skd-header">
+            <div class="skd-icon">🎬</div>
+            <div class="skd-info">
+              <div class="skd-name">Shot Skill</div>
+              <div class="skd-type">原子能力 · 镜头规划</div>
+            </div>
+            <div class="skd-status published">已发布</div>
+          </div>
+          <div class="skd-config">
+            <div class="config-item">
+              <span class="config-label">底层模型</span>
+              <span class="config-value">GPT-5.4</span>
+            </div>
+            <div class="config-item">
+              <span class="config-label">输入</span>
+              <span class="config-value">脚本 (from Script Skill), 风格</span>
+            </div>
+            <div class="config-item">
+              <span class="config-label">输出</span>
+              <span class="config-value">分镜表 (JSON: 镜头描述/时长/运镜)</span>
+            </div>
+          </div>
+          <div class="skd-refs">
+            <span class="ref-tag">被 3 个 Workflow 引用</span>
+          </div>
+          <div class="skd-stats">
+            <span>980 次调用</span>
+            <span>$196 收益</span>
+            <span>4.7 ★</span>
+          </div>
+        </div>
+
+        <div class="skill-detail-card">
+          <div class="skd-header">
+            <div class="skd-icon">🎵</div>
+            <div class="skd-info">
+              <div class="skd-name">Music Skill</div>
+              <div class="skd-type">原子能力 · 音乐匹配</div>
+            </div>
+            <div class="skd-status published">已发布</div>
+          </div>
+          <div class="skd-config">
+            <div class="config-item">
+              <span class="config-label">底层模型</span>
+              <span class="config-value">Suno v4 (生成) / Internal (匹配)</span>
+            </div>
+            <div class="config-item">
+              <span class="config-label">输入</span>
+              <span class="config-value">视频节奏分析, 风格标签</span>
+            </div>
+            <div class="config-item">
+              <span class="config-label">输出</span>
+              <span class="config-value">背景音乐 (音频文件 + 时间戳)</span>
+            </div>
+          </div>
+          <div class="skd-refs">
+            <span class="ref-tag">被 3 个 Workflow 引用</span>
+          </div>
+          <div class="skd-stats">
+            <span>720 次调用</span>
+            <span>$144 收益</span>
+            <span>4.6 ★</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== Workflow Editor ==================== -->
+    <div class="page" id="page-workflow-editor">
+      <div class="page-top-bar">
+        <div>
+          <h1>Workflow 编辑器</h1>
+          <p class="page-desc">可视化构建生产流程</p>
+        </div>
+        <div class="editor-actions">
+          <button class="btn-secondary">预览</button>
+          <button class="btn-secondary">保存草稿</button>
+          <button class="btn-primary">发布</button>
+        </div>
+      </div>
+
+      <div class="editor-layout">
+        <!-- Left: Node Palette -->
+        <div class="editor-palette">
+          <div class="palette-title">节点面板</div>
+
+          <div class="palette-group">
+            <div class="palette-group-title">输入节点</div>
+            <div class="palette-node" draggable="true" data-type="text-input">
+              <span class="pn-icon">📝</span>
+              <span class="pn-name">文本输入</span>
+            </div>
+            <div class="palette-node" draggable="true" data-type="image-input">
+              <span class="pn-icon">🖼️</span>
+              <span class="pn-name">图片输入</span>
+            </div>
+            <div class="palette-node" draggable="true" data-type="url-input">
+              <span class="pn-icon">🔗</span>
+              <span class="pn-name">URL输入</span>
+            </div>
+          </div>
+
+          <div class="palette-group">
+            <div class="palette-group-title">Skill 节点</div>
+            <div class="palette-node" draggable="true" data-type="script">
+              <span class="pn-icon">📝</span>
+              <span class="pn-name">Script Skill</span>
+            </div>
+            <div class="palette-node" draggable="true" data-type="shot">
+              <span class="pn-icon">🎬</span>
+              <span class="pn-name">Shot Skill</span>
+            </div>
+            <div class="palette-node" draggable="true" data-type="edit">
+              <span class="pn-icon">✂️</span>
+              <span class="pn-name">Edit Skill</span>
+            </div>
+            <div class="palette-node" draggable="true" data-type="music">
+              <span class="pn-icon">🎵</span>
+              <span class="pn-name">Music Skill</span>
+            </div>
+            <div class="palette-node" draggable="true" data-type="voice">
+              <span class="pn-icon">🗣️</span>
+              <span class="pn-name">Voice Skill</span>
+            </div>
+            <div class="palette-node" draggable="true" data-type="image">
+              <span class="pn-icon">🖼️</span>
+              <span class="pn-name">Image Skill</span>
+            </div>
+            <div class="palette-node" draggable="true" data-type="caption">
+              <span class="pn-icon">💬</span>
+              <span class="pn-name">Caption Skill</span>
+            </div>
+          </div>
+
+          <div class="palette-group">
+            <div class="palette-group-title">模型节点</div>
+            <div class="palette-node" draggable="true" data-type="kling">
+              <span class="pn-icon">🎥</span>
+              <span class="pn-name">Kling 3.0</span>
+            </div>
+            <div class="palette-node" draggable="true" data-type="sora">
+              <span class="pn-icon">🎥</span>
+              <span class="pn-name">Sora 2</span>
+            </div>
+            <div class="palette-node" draggable="true" data-type="veo">
+              <span class="pn-icon">🎥</span>
+              <span class="pn-name">Veo 3.1</span>
+            </div>
+          </div>
+
+          <div class="palette-group">
+            <div class="palette-group-title">输出节点</div>
+            <div class="palette-node" draggable="true" data-type="output">
+              <span class="pn-icon">📤</span>
+              <span class="pn-name">视频输出</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center: Canvas -->
+        <div class="editor-canvas" id="editorCanvas">
+          <div class="canvas-grid"></div>
+
+          <!-- Demo workflow nodes -->
+          <div class="canvas-node" style="left:60px;top:80px" id="node-1">
+            <div class="cn-header input-type">📝 文本输入</div>
+            <div class="cn-body">
+              <div class="cn-field">店铺名称, 特色, 风格</div>
+            </div>
+            <div class="cn-port output" data-port="out"></div>
+          </div>
+
+          <div class="canvas-connector" style="left:220px;top:105px;width:60px"></div>
+
+          <div class="canvas-node" style="left:280px;top:60px" id="node-2">
+            <div class="cn-header skill-type">✨ Script Skill</div>
+            <div class="cn-body">
+              <div class="cn-field">模型: GPT-5.4</div>
+              <div class="cn-field">模板: 探店脚本</div>
+              <div class="cn-field">输出: 结构化脚本</div>
+            </div>
+            <div class="cn-port input" data-port="in"></div>
+            <div class="cn-port output" data-port="out"></div>
+          </div>
+
+          <div class="canvas-connector" style="left:460px;top:105px;width:60px"></div>
+
+          <div class="canvas-node" style="left:520px;top:60px" id="node-3">
+            <div class="cn-header skill-type">🎬 Shot Skill</div>
+            <div class="cn-body">
+              <div class="cn-field">模型: GPT-5.4</div>
+              <div class="cn-field">输出: 分镜表</div>
+            </div>
+            <div class="cn-port input" data-port="in"></div>
+            <div class="cn-port output" data-port="out"></div>
+          </div>
+
+          <div class="canvas-connector" style="left:700px;top:105px;width:60px"></div>
+
+          <div class="canvas-node" style="left:760px;top:60px" id="node-4">
+            <div class="cn-header model-type">🎥 Kling 3.0</div>
+            <div class="cn-body">
+              <div class="cn-field">分辨率: 1080p</div>
+              <div class="cn-field">时长: 按分镜</div>
+            </div>
+            <div class="cn-port input" data-port="in"></div>
+            <div class="cn-port output" data-port="out"></div>
+          </div>
+
+          <div class="canvas-connector" style="left:940px;top:105px;width:60px"></div>
+
+          <div class="canvas-node" style="left:1000px;top:40px" id="node-5">
+            <div class="cn-header skill-type">✂️ Edit + 🎵 Music</div>
+            <div class="cn-body">
+              <div class="cn-field">剪辑节奏: 自动</div>
+              <div class="cn-field">配乐: Suno v4</div>
+              <div class="cn-field">配音: ElevenLabs</div>
+            </div>
+            <div class="cn-port input" data-port="in"></div>
+            <div class="cn-port output" data-port="out"></div>
+          </div>
+
+          <div class="canvas-connector" style="left:1180px;top:105px;width:60px"></div>
+
+          <div class="canvas-node" style="left:1240px;top:80px" id="node-6">
+            <div class="cn-header output-type">📤 视频输出</div>
+            <div class="cn-body">
+              <div class="cn-field">格式: MP4 / MOV</div>
+              <div class="cn-field">含字幕和水印</div>
+            </div>
+            <div class="cn-port input" data-port="in"></div>
+          </div>
+
+          <div class="canvas-hint">拖拽左侧节点到画布, 连接构建 Workflow</div>
+        </div>
+
+        <!-- Right: Properties Panel -->
+        <div class="editor-props">
+          <div class="props-title">节点属性</div>
+          <div class="props-placeholder">
+            <p>点击画布中的节点<br>查看和编辑属性</p>
+          </div>
+
+          <div class="props-content" id="propsContent" style="display:none">
+            <div class="prop-group">
+              <label class="prop-label">节点名称</label>
+              <input type="text" class="prop-input" value="Script Skill">
+            </div>
+            <div class="prop-group">
+              <label class="prop-label">底层模型</label>
+              <select class="prop-select">
+                <option selected>GPT-5.4</option>
+                <option>Claude Sonnet 4.6</option>
+                <option>Claude Opus 4</option>
+              </select>
+            </div>
+            <div class="prop-group">
+              <label class="prop-label">Prompt 模板</label>
+              <textarea class="prop-textarea" rows="6">你是一个专业的视频脚本编剧. 根据以下信息生成探店视频脚本:
+
+- 店铺: {{shop_name}}
+- 特色: {{features}}
+- 风格: {{style}}
+- 时长: {{duration}}
+
+输出格式: JSON结构化脚本...</textarea>
+            </div>
+            <div class="prop-group">
+              <label class="prop-label">输出格式</label>
+              <select class="prop-select">
+                <option selected>JSON (结构化)</option>
+                <option>纯文本</option>
+                <option>Markdown</option>
+              </select>
+            </div>
+            <div class="prop-group">
+              <label class="prop-label">温度 (Temperature)</label>
+              <input type="range" class="prop-range" min="0" max="100" value="70">
+              <span class="range-value">0.7</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== Analytics ==================== -->
+    <div class="page" id="page-analytics">
+      <div class="page-top-bar">
+        <div>
+          <h1>调用分析</h1>
+          <p class="page-desc">深入了解你的资产被如何使用</p>
+        </div>
+      </div>
+
+      <div class="analytics-cards">
+        <div class="ana-card">
+          <h3>调用来源</h3>
+          <div class="ana-sources">
+            <div class="source-item">
+              <div class="source-bar-wrapper">
+                <div class="source-label">直接调用 (用户)</div>
+                <div class="source-bar"><div class="source-fill" style="width:55%"></div></div>
+              </div>
+              <span class="source-pct">55%</span>
+            </div>
+            <div class="source-item">
+              <div class="source-bar-wrapper">
+                <div class="source-label">Agent 内部调用</div>
+                <div class="source-bar"><div class="source-fill" style="width:30%"></div></div>
+              </div>
+              <span class="source-pct">30%</span>
+            </div>
+            <div class="source-item">
+              <div class="source-bar-wrapper">
+                <div class="source-label">API 集成</div>
+                <div class="source-bar"><div class="source-fill" style="width:15%"></div></div>
+              </div>
+              <span class="source-pct">15%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ana-card">
+          <h3>用户地区 Top 5</h3>
+          <div class="region-list">
+            <div class="region-item"><span class="region-flag">🇺🇸</span><span>美国</span><span class="region-pct">32%</span></div>
+            <div class="region-item"><span class="region-flag">🇬🇧</span><span>英国</span><span class="region-pct">18%</span></div>
+            <div class="region-item"><span class="region-flag">🇸🇬</span><span>新加坡</span><span class="region-pct">14%</span></div>
+            <div class="region-item"><span class="region-flag">🇧🇷</span><span>巴西</span><span class="region-pct">11%</span></div>
+            <div class="region-item"><span class="region-flag">🇮🇳</span><span>印度</span><span class="region-pct">9%</span></div>
+          </div>
+        </div>
+
+        <div class="ana-card">
+          <h3>内容类型分布</h3>
+          <div class="content-types">
+            <div class="ct-item">
+              <div class="ct-bar" style="height:80%"></div>
+              <div class="ct-label">探店</div>
+              <div class="ct-value">35%</div>
+            </div>
+            <div class="ct-item">
+              <div class="ct-bar" style="height:60%"></div>
+              <div class="ct-label">广告</div>
+              <div class="ct-value">26%</div>
+            </div>
+            <div class="ct-item">
+              <div class="ct-bar" style="height:45%"></div>
+              <div class="ct-label">品牌</div>
+              <div class="ct-value">18%</div>
+            </div>
+            <div class="ct-item">
+              <div class="ct-bar" style="height:30%"></div>
+              <div class="ct-label">旅行</div>
+              <div class="ct-value">12%</div>
+            </div>
+            <div class="ct-item">
+              <div class="ct-bar" style="height:20%"></div>
+              <div class="ct-label">其他</div>
+              <div class="ct-value">9%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ana-card full-width">
+        <h3>调用时间热力图 (过去7天)</h3>
+        <div class="heatmap">
+          <div class="heatmap-row">
+            <span class="hm-label">周一</span>
+            <div class="hm-cells">
+              <div class="hm-cell" style="opacity:0.2"></div><div class="hm-cell" style="opacity:0.1"></div><div class="hm-cell" style="opacity:0.1"></div><div class="hm-cell" style="opacity:0.1"></div><div class="hm-cell" style="opacity:0.15"></div><div class="hm-cell" style="opacity:0.2"></div>
+              <div class="hm-cell" style="opacity:0.3"></div><div class="hm-cell" style="opacity:0.5"></div><div class="hm-cell" style="opacity:0.7"></div><div class="hm-cell" style="opacity:0.9"></div><div class="hm-cell" style="opacity:0.85"></div><div class="hm-cell" style="opacity:0.8"></div>
+              <div class="hm-cell" style="opacity:0.6"></div><div class="hm-cell" style="opacity:0.75"></div><div class="hm-cell" style="opacity:0.9"></div><div class="hm-cell" style="opacity:0.95"></div><div class="hm-cell" style="opacity:0.7"></div><div class="hm-cell" style="opacity:0.5"></div>
+              <div class="hm-cell" style="opacity:0.4"></div><div class="hm-cell" style="opacity:0.35"></div><div class="hm-cell" style="opacity:0.3"></div><div class="hm-cell" style="opacity:0.25"></div><div class="hm-cell" style="opacity:0.2"></div><div class="hm-cell" style="opacity:0.15"></div>
+            </div>
+          </div>
+          <div class="heatmap-row">
+            <span class="hm-label">周二</span>
+            <div class="hm-cells">
+              <div class="hm-cell" style="opacity:0.15"></div><div class="hm-cell" style="opacity:0.1"></div><div class="hm-cell" style="opacity:0.1"></div><div class="hm-cell" style="opacity:0.1"></div><div class="hm-cell" style="opacity:0.2"></div><div class="hm-cell" style="opacity:0.25"></div>
+              <div class="hm-cell" style="opacity:0.4"></div><div class="hm-cell" style="opacity:0.6"></div><div class="hm-cell" style="opacity:0.8"></div><div class="hm-cell" style="opacity:1"></div><div class="hm-cell" style="opacity:0.9"></div><div class="hm-cell" style="opacity:0.75"></div>
+              <div class="hm-cell" style="opacity:0.65"></div><div class="hm-cell" style="opacity:0.8"></div><div class="hm-cell" style="opacity:0.85"></div><div class="hm-cell" style="opacity:0.9"></div><div class="hm-cell" style="opacity:0.65"></div><div class="hm-cell" style="opacity:0.45"></div>
+              <div class="hm-cell" style="opacity:0.35"></div><div class="hm-cell" style="opacity:0.3"></div><div class="hm-cell" style="opacity:0.25"></div><div class="hm-cell" style="opacity:0.2"></div><div class="hm-cell" style="opacity:0.15"></div><div class="hm-cell" style="opacity:0.1"></div>
+            </div>
+          </div>
+          <div class="heatmap-row">
+            <span class="hm-label">周三</span>
+            <div class="hm-cells">
+              <div class="hm-cell" style="opacity:0.2"></div><div class="hm-cell" style="opacity:0.15"></div><div class="hm-cell" style="opacity:0.1"></div><div class="hm-cell" style="opacity:0.1"></div><div class="hm-cell" style="opacity:0.15"></div><div class="hm-cell" style="opacity:0.3"></div>
+              <div class="hm-cell" style="opacity:0.45"></div><div class="hm-cell" style="opacity:0.65"></div><div class="hm-cell" style="opacity:0.85"></div><div class="hm-cell" style="opacity:0.95"></div><div class="hm-cell" style="opacity:0.8"></div><div class="hm-cell" style="opacity:0.7"></div>
+              <div class="hm-cell" style="opacity:0.6"></div><div class="hm-cell" style="opacity:0.7"></div><div class="hm-cell" style="opacity:0.8"></div><div class="hm-cell" style="opacity:0.85"></div><div class="hm-cell" style="opacity:0.6"></div><div class="hm-cell" style="opacity:0.4"></div>
+              <div class="hm-cell" style="opacity:0.3"></div><div class="hm-cell" style="opacity:0.25"></div><div class="hm-cell" style="opacity:0.2"></div><div class="hm-cell" style="opacity:0.15"></div><div class="hm-cell" style="opacity:0.1"></div><div class="hm-cell" style="opacity:0.1"></div>
+            </div>
+          </div>
+          <div class="hm-times">
+            <span>0:00</span><span>4:00</span><span>8:00</span><span>12:00</span><span>16:00</span><span>20:00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== Feedback ==================== -->
+    <div class="page" id="page-feedback">
+      <div class="page-top-bar">
+        <div>
+          <h1>用户反馈</h1>
+          <p class="page-desc">来自使用你资产的用户评价</p>
+        </div>
+      </div>
+
+      <div class="feedback-list">
+        <div class="feedback-card">
+          <div class="fb-header">
+            <div class="fb-user">
+              <div class="fb-avatar">M</div>
+              <div>
+                <div class="fb-name">@foodie_mark</div>
+                <div class="fb-target">使用了 Restaurant Marketing Agent</div>
+              </div>
+            </div>
+            <div class="fb-rating">★★★★★</div>
+          </div>
+          <div class="fb-content">效果超出预期! 输入店铺信息后, 自动生成的探店脚本非常专业, 镜头规划也很有节奏感. 配乐和画面很搭, 几乎不需要手动调整.</div>
+          <div class="fb-time">2小时前</div>
+        </div>
+
+        <div class="feedback-card">
+          <div class="fb-header">
+            <div class="fb-user">
+              <div class="fb-avatar">L</div>
+              <div>
+                <div class="fb-name">@shop_lily</div>
+                <div class="fb-target">使用了 商品广告全流程 Workflow</div>
+              </div>
+            </div>
+            <div class="fb-rating">★★★★★</div>
+          </div>
+          <div class="fb-content">卖点提炼很准确, 脚本文案质量高. 唯一建议是希望能支持更多电商平台的尺寸模板 (如 TikTok Shop 竖屏).</div>
+          <div class="fb-time">5小时前</div>
+        </div>
+
+        <div class="feedback-card">
+          <div class="fb-header">
+            <div class="fb-user">
+              <div class="fb-avatar">C</div>
+              <div>
+                <div class="fb-name">@travel_chen</div>
+                <div class="fb-target">使用了 Restaurant Marketing Agent</div>
+              </div>
+            </div>
+            <div class="fb-rating">★★★★☆</div>
+          </div>
+          <div class="fb-content">整体不错, 生成速度很快. 但日式风格的色调有时偏暖过头, 希望能更细粒度地控制色彩参数.</div>
+          <div class="fb-time">1天前</div>
+        </div>
+
+        <div class="feedback-card">
+          <div class="fb-header">
+            <div class="fb-user">
+              <div class="fb-avatar">A</div>
+              <div>
+                <div class="fb-name">@brand_alex</div>
+                <div class="fb-target">使用了 Script Skill Pro</div>
+              </div>
+            </div>
+            <div class="fb-rating">★★★★★</div>
+          </div>
+          <div class="fb-content">脚本质量非常好, JSON结构化输出让后续处理很方便. 和 Shot Skill 配合使用体验很流畅.</div>
+          <div class="fb-time">2天前</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="creator-app.js"></script>
+</body>
+</html>
