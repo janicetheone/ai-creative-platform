@@ -49,6 +49,10 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         <span>我的 Skill</span>
       </a>
+      <a class="nav-item" data-page="agent-editor" onclick="switchPage('agent-editor')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <span>Agent 编辑器</span>
+      </a>
       <a class="nav-item" data-page="workflow-editor" onclick="switchPage('workflow-editor')">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
         <span>Workflow 编辑器</span>
@@ -963,6 +967,357 @@
               <label class="prop-label">温度 (Temperature)</label>
               <input type="range" class="prop-range" min="0" max="100" value="70">
               <span class="range-value">0.7</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== Agent Editor ==================== -->
+    <div class="page" id="page-agent-editor">
+      <div class="page-top-bar">
+        <div>
+          <h1>Agent 编辑器</h1>
+          <p class="page-desc">从模板快速创建, 或从零构建你的 Agent</p>
+        </div>
+        <div class="editor-actions">
+          <button class="btn-secondary">预览效果</button>
+          <button class="btn-secondary">保存草稿</button>
+          <button class="btn-primary">发布 Agent</button>
+        </div>
+      </div>
+
+      <!-- Template Selection -->
+      <div class="ae-section" id="agentTemplates">
+        <div class="ae-section-title">选择模板快速开始</div>
+        <div class="ae-templates-grid">
+          <div class="ae-template" onclick="selectAgentTemplate('food')">
+            <div class="ae-tpl-icon" style="background:linear-gradient(135deg,#f97316,#ef4444)">🍜</div>
+            <div class="ae-tpl-name">美食探店 Agent</div>
+            <div class="ae-tpl-desc">餐厅/咖啡店探店视频, 含菜品展示和氛围拍摄</div>
+            <div class="ae-tpl-includes">含 2 Workflow + 5 Skill</div>
+          </div>
+          <div class="ae-template" onclick="selectAgentTemplate('product')">
+            <div class="ae-tpl-icon" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">📦</div>
+            <div class="ae-tpl-name">商品广告 Agent</div>
+            <div class="ae-tpl-desc">电商开箱, 卖点展示, 产品对比视频</div>
+            <div class="ae-tpl-includes">含 3 Workflow + 6 Skill</div>
+          </div>
+          <div class="ae-template" onclick="selectAgentTemplate('travel')">
+            <div class="ae-tpl-icon" style="background:linear-gradient(135deg,#22c55e,#06b6d4)">✈️</div>
+            <div class="ae-tpl-name">旅行Vlog Agent</div>
+            <div class="ae-tpl-desc">目的地攻略, 旅行日记, 风景展示</div>
+            <div class="ae-tpl-includes">含 2 Workflow + 4 Skill</div>
+          </div>
+          <div class="ae-template" onclick="selectAgentTemplate('brand')">
+            <div class="ae-tpl-icon" style="background:linear-gradient(135deg,#a78bfa,#ec4899)">🏢</div>
+            <div class="ae-tpl-name">品牌宣传 Agent</div>
+            <div class="ae-tpl-desc">企业宣传片, 品牌故事, 年度回顾</div>
+            <div class="ae-tpl-includes">含 2 Workflow + 5 Skill</div>
+          </div>
+          <div class="ae-template" onclick="selectAgentTemplate('education')">
+            <div class="ae-tpl-icon" style="background:linear-gradient(135deg,#fbbf24,#f59e0b)">🎓</div>
+            <div class="ae-tpl-name">教育内容 Agent</div>
+            <div class="ae-tpl-desc">知识讲解, 课程片段, 教学动画</div>
+            <div class="ae-tpl-includes">含 2 Workflow + 4 Skill</div>
+          </div>
+          <div class="ae-template" onclick="selectAgentTemplate('pet')">
+            <div class="ae-tpl-icon" style="background:linear-gradient(135deg,#f472b6,#fb923c)">🐱</div>
+            <div class="ae-tpl-name">萌宠内容 Agent</div>
+            <div class="ae-tpl-desc">宠物日常, 萌宠大片, 宠物Vlog</div>
+            <div class="ae-tpl-includes">含 2 Workflow + 4 Skill</div>
+          </div>
+          <div class="ae-template" onclick="selectAgentTemplate('fitness')">
+            <div class="ae-tpl-icon" style="background:linear-gradient(135deg,#14b8a6,#22c55e)">🏋️</div>
+            <div class="ae-tpl-name">健身内容 Agent</div>
+            <div class="ae-tpl-desc">健身教程, 运动打卡, 身材对比</div>
+            <div class="ae-tpl-includes">含 1 Workflow + 3 Skill</div>
+          </div>
+          <div class="ae-template ae-template-blank" onclick="selectAgentTemplate('blank')">
+            <div class="ae-tpl-icon" style="background:var(--bg-tertiary);border:2px dashed var(--border)">+</div>
+            <div class="ae-tpl-name">空白 Agent</div>
+            <div class="ae-tpl-desc">从零开始, 自由组合 Workflow 和 Skill</div>
+            <div class="ae-tpl-includes">自定义构成</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agent Config (shown after template selection) -->
+      <div class="ae-config" id="agentConfig" style="display:none">
+        <div class="ae-config-grid">
+          <!-- Left: Basic Info -->
+          <div class="ae-config-left">
+            <div class="ae-card">
+              <div class="ae-card-title">基本信息</div>
+              <div class="ae-field">
+                <label>Agent 名称</label>
+                <input type="text" class="ae-input" id="agentName" value="美食探店 Agent" placeholder="给你的Agent起个名字">
+              </div>
+              <div class="ae-field">
+                <label>图标</label>
+                <div class="ae-icon-picker">
+                  <span class="ae-icon-option selected">🍜</span>
+                  <span class="ae-icon-option">🍰</span>
+                  <span class="ae-icon-option">☕</span>
+                  <span class="ae-icon-option">🍕</span>
+                  <span class="ae-icon-option">🍜</span>
+                  <span class="ae-icon-option">🥘</span>
+                  <span class="ae-icon-option">🍣</span>
+                  <span class="ae-icon-option">🧋</span>
+                </div>
+              </div>
+              <div class="ae-field">
+                <label>描述</label>
+                <textarea class="ae-textarea" rows="3" placeholder="描述Agent的功能和使用场景">探店视频, 菜品展示, 餐厅氛围宣传. 支持日系/中式/西式多种风格.</textarea>
+              </div>
+              <div class="ae-field">
+                <label>标签</label>
+                <div class="ae-tags-input">
+                  <span class="ae-tag-chip">美食 ✕</span>
+                  <span class="ae-tag-chip">探店 ✕</span>
+                  <span class="ae-tag-chip">视频 ✕</span>
+                  <input type="text" class="ae-tag-input" placeholder="添加标签...">
+                </div>
+              </div>
+              <div class="ae-field">
+                <label>定价</label>
+                <div class="ae-pricing-row">
+                  <select class="ae-select">
+                    <option>按次收费</option>
+                    <option>免费</option>
+                    <option>订阅制</option>
+                  </select>
+                  <div class="ae-price-input">
+                    <span class="ae-price-symbol">$</span>
+                    <input type="number" class="ae-input" value="0.35" step="0.01">
+                    <span class="ae-price-unit">/ 次</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Intent Understanding Config -->
+            <div class="ae-card">
+              <div class="ae-card-title">意图理解配置</div>
+              <div class="ae-field">
+                <label>Agent 人设 (System Prompt)</label>
+                <textarea class="ae-textarea ae-code" rows="6">你是一个专业的美食视频制作Agent. 当用户描述一家餐厅或美食场景时, 你需要:
+1. 理解用户的拍摄意图和风格偏好
+2. 选择合适的Workflow (探店 or 菜品展示)
+3. 调用Script Skill生成脚本
+4. 调用Shot Skill规划镜头
+5. 协调Model生成视频并完成剪辑配音</textarea>
+              </div>
+              <div class="ae-field">
+                <label>支持的意图类型</label>
+                <div class="ae-intent-list">
+                  <div class="ae-intent-item">
+                    <span class="ae-intent-badge">探店视频</span>
+                    <span class="ae-intent-example">"帮我做一个XX餐厅的探店视频"</span>
+                  </div>
+                  <div class="ae-intent-item">
+                    <span class="ae-intent-badge">菜品展示</span>
+                    <span class="ae-intent-example">"展示这几道招牌菜的卖相"</span>
+                  </div>
+                  <div class="ae-intent-item">
+                    <span class="ae-intent-badge">氛围宣传</span>
+                    <span class="ae-intent-example">"突出餐厅的日式氛围感"</span>
+                  </div>
+                  <button class="ae-add-intent">+ 添加意图</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Composition -->
+          <div class="ae-config-right">
+            <!-- Workflow Binding -->
+            <div class="ae-card">
+              <div class="ae-card-title">Workflow 绑定</div>
+              <div class="ae-card-subtitle">Agent 根据意图类型选择对应 Workflow 执行</div>
+              <div class="ae-wf-bindings">
+                <div class="ae-wf-binding">
+                  <div class="ae-wf-binding-header">
+                    <div class="ae-wf-binding-icon">📋</div>
+                    <div class="ae-wf-binding-info">
+                      <div class="ae-wf-binding-name">探店视频模板</div>
+                      <div class="ae-wf-binding-meta">6 Steps · 4.7 ★ · 1,842 次使用</div>
+                    </div>
+                    <div class="ae-wf-binding-intent">
+                      <span class="ae-intent-mini">探店</span>
+                      <span class="ae-intent-mini">氛围</span>
+                    </div>
+                  </div>
+                  <div class="ae-wf-binding-flow">
+                    <span class="ae-mini-node">店铺信息</span>
+                    <span class="ae-mini-arrow">→</span>
+                    <span class="ae-mini-node">亮点提炼</span>
+                    <span class="ae-mini-arrow">→</span>
+                    <span class="ae-mini-node">脚本</span>
+                    <span class="ae-mini-arrow">→</span>
+                    <span class="ae-mini-node">分镜</span>
+                    <span class="ae-mini-arrow">→</span>
+                    <span class="ae-mini-node">生成</span>
+                    <span class="ae-mini-arrow">→</span>
+                    <span class="ae-mini-node">剪辑</span>
+                  </div>
+                </div>
+                <div class="ae-wf-binding">
+                  <div class="ae-wf-binding-header">
+                    <div class="ae-wf-binding-icon">🍜</div>
+                    <div class="ae-wf-binding-info">
+                      <div class="ae-wf-binding-name">菜品展示流程</div>
+                      <div class="ae-wf-binding-meta">4 Steps · 4.5 ★ · 890 次使用</div>
+                    </div>
+                    <div class="ae-wf-binding-intent">
+                      <span class="ae-intent-mini">菜品</span>
+                    </div>
+                  </div>
+                  <div class="ae-wf-binding-flow">
+                    <span class="ae-mini-node">菜品照片</span>
+                    <span class="ae-mini-arrow">→</span>
+                    <span class="ae-mini-node">美食文案</span>
+                    <span class="ae-mini-arrow">→</span>
+                    <span class="ae-mini-node">特写生成</span>
+                    <span class="ae-mini-arrow">→</span>
+                    <span class="ae-mini-node">剪辑</span>
+                  </div>
+                </div>
+                <button class="ae-add-wf">+ 绑定 Workflow</button>
+              </div>
+            </div>
+
+            <!-- Skill Config -->
+            <div class="ae-card">
+              <div class="ae-card-title">Skill 配置</div>
+              <div class="ae-card-subtitle">Agent 可用的原子能力, 被 Workflow 引用</div>
+              <div class="ae-skill-list">
+                <div class="ae-skill-item">
+                  <span class="ae-skill-icon">📝</span>
+                  <div class="ae-skill-info">
+                    <div class="ae-skill-name">Script Skill</div>
+                    <div class="ae-skill-model">GPT-5.4 / Claude 4.6</div>
+                  </div>
+                  <div class="ae-skill-toggle on">ON</div>
+                </div>
+                <div class="ae-skill-item">
+                  <span class="ae-skill-icon">🎬</span>
+                  <div class="ae-skill-info">
+                    <div class="ae-skill-name">Shot Skill</div>
+                    <div class="ae-skill-model">GPT-5.4</div>
+                  </div>
+                  <div class="ae-skill-toggle on">ON</div>
+                </div>
+                <div class="ae-skill-item">
+                  <span class="ae-skill-icon">✂️</span>
+                  <div class="ae-skill-info">
+                    <div class="ae-skill-name">Edit Skill</div>
+                    <div class="ae-skill-model">Internal</div>
+                  </div>
+                  <div class="ae-skill-toggle on">ON</div>
+                </div>
+                <div class="ae-skill-item">
+                  <span class="ae-skill-icon">🎵</span>
+                  <div class="ae-skill-info">
+                    <div class="ae-skill-name">Music Skill</div>
+                    <div class="ae-skill-model">Suno v4</div>
+                  </div>
+                  <div class="ae-skill-toggle on">ON</div>
+                </div>
+                <div class="ae-skill-item">
+                  <span class="ae-skill-icon">🗣️</span>
+                  <div class="ae-skill-info">
+                    <div class="ae-skill-name">Voice Skill</div>
+                    <div class="ae-skill-model">ElevenLabs</div>
+                  </div>
+                  <div class="ae-skill-toggle on">ON</div>
+                </div>
+                <div class="ae-skill-item">
+                  <span class="ae-skill-icon">🖼️</span>
+                  <div class="ae-skill-info">
+                    <div class="ae-skill-name">Image Skill</div>
+                    <div class="ae-skill-model">SD3 / Midjourney</div>
+                  </div>
+                  <div class="ae-skill-toggle off">OFF</div>
+                </div>
+                <div class="ae-skill-item">
+                  <span class="ae-skill-icon">💬</span>
+                  <div class="ae-skill-info">
+                    <div class="ae-skill-name">Caption Skill</div>
+                    <div class="ae-skill-model">Whisper / GPT</div>
+                  </div>
+                  <div class="ae-skill-toggle off">OFF</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Model Router Config -->
+            <div class="ae-card">
+              <div class="ae-card-title">Model Router 配置</div>
+              <div class="ae-card-subtitle">指定各任务使用的生成模型</div>
+              <div class="ae-model-routes">
+                <div class="ae-model-route">
+                  <span class="ae-route-task">视频生成</span>
+                  <select class="ae-select">
+                    <option selected>Kling 3.0</option>
+                    <option>Sora 2</option>
+                    <option>Veo 3.1</option>
+                    <option>Runway Gen-4.5</option>
+                  </select>
+                </div>
+                <div class="ae-model-route">
+                  <span class="ae-route-task">文案生成</span>
+                  <select class="ae-select">
+                    <option selected>GPT-5.4</option>
+                    <option>Claude Sonnet 4.6</option>
+                    <option>Claude Opus 4</option>
+                  </select>
+                </div>
+                <div class="ae-model-route">
+                  <span class="ae-route-task">语音合成</span>
+                  <select class="ae-select">
+                    <option selected>ElevenLabs</option>
+                    <option>Murf.ai</option>
+                    <option>无 (不配音)</option>
+                  </select>
+                </div>
+                <div class="ae-model-route">
+                  <span class="ae-route-task">背景音乐</span>
+                  <select class="ae-select">
+                    <option selected>Suno v4</option>
+                    <option>Udio</option>
+                    <option>音乐库匹配</option>
+                  </select>
+                </div>
+                <div class="ae-model-route">
+                  <span class="ae-route-task">图片生成</span>
+                  <select class="ae-select">
+                    <option selected>SD3</option>
+                    <option>Midjourney</option>
+                    <option>DALL-E 3</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Memory Config -->
+            <div class="ae-card">
+              <div class="ae-card-title">Memory 读取配置</div>
+              <div class="ae-card-subtitle">Agent 执行时会读取哪些用户记忆</div>
+              <div class="ae-memory-config">
+                <label class="ae-checkbox">
+                  <input type="checkbox" checked> <span class="ae-cb-label">Identity Memory</span>
+                  <span class="ae-cb-desc">品牌名称, 调性, 目标受众</span>
+                </label>
+                <label class="ae-checkbox">
+                  <input type="checkbox" checked> <span class="ae-cb-label">Preference Memory</span>
+                  <span class="ae-cb-desc">风格, 色调, 剪辑节奏, 音乐偏好</span>
+                </label>
+                <label class="ae-checkbox">
+                  <input type="checkbox" checked> <span class="ae-cb-label">Asset Memory</span>
+                  <span class="ae-cb-desc">Logo, 字体, 品牌色, 历史素材</span>
+                </label>
+              </div>
             </div>
           </div>
         </div>

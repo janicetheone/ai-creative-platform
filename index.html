@@ -31,7 +31,11 @@
 
     <div class="nav-section">
       <div class="nav-label">MAIN</div>
-      <a class="nav-item active" data-page="home" onclick="switchPage('home')">
+      <a class="nav-item active" data-page="discover" onclick="switchPage('discover')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>发现</span>
+      </a>
+      <a class="nav-item" data-page="home" onclick="switchPage('home')">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/></svg>
         <span>创作中心</span>
       </a>
@@ -73,8 +77,413 @@
   <!-- Main Content -->
   <main class="main-content">
 
+    <!-- Page: Discover / 发现 Feed -->
+    <div class="page active" id="page-discover">
+      <!-- Sticky top bar with search -->
+      <div class="discover-topbar">
+        <div class="discover-topbar-inner">
+          <div class="discover-search-wrap">
+            <svg class="discover-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="discover-search" id="discoverSearch" placeholder="搜索 Agent、Workflow、创作者..." oninput="filterFeedCards()">
+          </div>
+          <div class="discover-intent-mini">
+            <input type="text" class="discover-intent-input" id="discoverIntentInput" placeholder="描述你的创意, 开始创作...">
+            <button class="discover-intent-btn" onclick="discoverStartCreate()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category filter tabs -->
+      <div class="discover-categories">
+        <button class="category-tab active" onclick="filterCategory(this, 'all')">全部</button>
+        <button class="category-tab" onclick="filterCategory(this, 'hot')">热门</button>
+        <button class="category-tab" onclick="filterCategory(this, 'video')">视频制作</button>
+        <button class="category-tab" onclick="filterCategory(this, 'ecommerce')">电商营销</button>
+        <button class="category-tab" onclick="filterCategory(this, 'life')">生活记录</button>
+        <button class="category-tab" onclick="filterCategory(this, 'brand')">品牌内容</button>
+      </div>
+
+      <!-- Masonry Feed -->
+      <div class="feed-masonry" id="feedMasonry">
+        <!-- Card 1: 导演模式 -->
+        <div class="feed-card" data-category="video hot" data-type="agent">
+          <div class="feed-thumb" style="background: linear-gradient(135deg, #667eea, #764ba2); height: 180px;">
+            <span class="feed-thumb-emoji">🎬</span>
+            <span class="feed-type-badge">Agent</span>
+          </div>
+          <div class="feed-body">
+            <div class="feed-card-title">导演模式 Director Agent</div>
+            <div class="feed-card-desc">一句话变电影质感短片, 自动生成分镜、调色、配乐, 让每个人都能当导演</div>
+            <div class="feed-card-tags">
+              <span class="feed-tag">电影感</span>
+              <span class="feed-tag">短片</span>
+              <span class="feed-tag">一键生成</span>
+            </div>
+            <div class="feed-card-footer">
+              <div class="feed-creator">
+                <div class="creator-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">F</div>
+                <span class="creator-name">@film_master</span>
+              </div>
+              <div class="feed-stats">
+                <span class="feed-stat">&#10084; 2.3k</span>
+                <span class="feed-stat">&#9889; 8.9k</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: 吃播制作机 -->
+        <div class="feed-card" data-category="video ecommerce life" data-type="agent">
+          <div class="feed-thumb" style="background: linear-gradient(135deg, #f093fb, #f5576c); height: 140px;">
+            <span class="feed-thumb-emoji">🍜</span>
+            <span class="feed-type-badge">Agent</span>
+          </div>
+          <div class="feed-body">
+            <div class="feed-card-title">吃播制作机 Food Content Agent</div>
+            <div class="feed-card-desc">3张菜品图自动生成种草视频, 美食博主必备利器</div>
+            <div class="feed-card-tags">
+              <span class="feed-tag">美食</span>
+              <span class="feed-tag">种草</span>
+            </div>
+            <div class="feed-card-footer">
+              <div class="feed-creator">
+                <div class="creator-avatar" style="background: linear-gradient(135deg, #f093fb, #f5576c);">F</div>
+                <span class="creator-name">@foodie_pro</span>
+              </div>
+              <div class="feed-stats">
+                <span class="feed-stat">&#10084; 1.8k</span>
+                <span class="feed-stat">&#9889; 5.2k</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: 爆款开箱 -->
+        <div class="feed-card" data-category="ecommerce video hot" data-type="agent">
+          <div class="feed-thumb" style="background: linear-gradient(135deg, #4facfe, #00f2fe); height: 160px;">
+            <span class="feed-thumb-emoji">📦</span>
+            <span class="feed-type-badge">Agent</span>
+          </div>
+          <div class="feed-body">
+            <div class="feed-card-title">爆款开箱 Unbox Agent</div>
+            <div class="feed-card-desc">输入商品链接, 输出开箱测评视频, 自动提炼卖点, 生成专业测评脚本和画面</div>
+            <div class="feed-card-tags">
+              <span class="feed-tag">开箱</span>
+              <span class="feed-tag">测评</span>
+              <span class="feed-tag">电商</span>
+            </div>
+            <div class="feed-card-footer">
+              <div class="feed-creator">
+                <div class="creator-avatar" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">T</div>
+                <span class="creator-name">@techreviewer</span>
+              </div>
+              <div class="feed-stats">
+                <span class="feed-stat">&#10084; 3.1k</span>
+                <span class="feed-stat">&#9889; 12k</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: 旅行日记 -->
+        <div class="feed-card" data-category="life video" data-type="agent">
+          <div class="feed-thumb" style="background: linear-gradient(135deg, #43e97b, #38f9d7); height: 200px;">
+            <span class="feed-thumb-emoji">✈️</span>
+            <span class="feed-type-badge">Agent</span>
+          </div>
+          <div class="feed-body">
+            <div class="feed-card-title">旅行日记 Travel Diary Agent</div>
+            <div class="feed-card-desc">照片+地点自动生成旅行vlog, 智能匹配当地BGM, 生成地图动画和转场效果</div>
+            <div class="feed-card-tags">
+              <span class="feed-tag">旅行</span>
+              <span class="feed-tag">Vlog</span>
+              <span class="feed-tag">地图</span>
+            </div>
+            <div class="feed-card-footer">
+              <div class="feed-creator">
+                <div class="creator-avatar" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">W</div>
+                <span class="creator-name">@wanderlust</span>
+              </div>
+              <div class="feed-stats">
+                <span class="feed-stat">&#10084; 2.7k</span>
+                <span class="feed-stat">&#9889; 7.3k</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: 房产漫游 -->
+        <div class="feed-card" data-category="ecommerce brand" data-type="agent">
+          <div class="feed-thumb" style="background: linear-gradient(135deg, #a18cd1, #fbc2eb); height: 150px;">
+            <span class="feed-thumb-emoji">🏠</span>
+            <span class="feed-type-badge">Agent</span>
+          </div>
+          <div class="feed-body">
+            <div class="feed-card-title">房产漫游 Property Tour Agent</div>
+            <div class="feed-card-desc">户型图+照片生成VR看房视频</div>
+            <div class="feed-card-tags">
+              <span class="feed-tag">房产</span>
+              <span class="feed-tag">VR</span>
+            </div>
+            <div class="feed-card-footer">
+              <div class="feed-creator">
+                <div class="creator-avatar" style="background: linear-gradient(135deg, #a18cd1, #fbc2eb);">R</div>
+                <span class="creator-name">@realty_ai</span>
+              </div>
+              <div class="feed-stats">
+                <span class="feed-stat">&#10084; 890</span>
+                <span class="feed-stat">&#9889; 2.1k</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6: 节拍踩点 -->
+        <div class="feed-card" data-category="video hot" data-type="agent">
+          <div class="feed-thumb" style="background: linear-gradient(135deg, #fa709a, #fee140); height: 170px;">
+            <span class="feed-thumb-emoji">🎵</span>
+            <span class="feed-type-badge">Agent</span>
+          </div>
+          <div class="feed-body">
+            <div class="feed-card-title">节拍踩点 Beat Sync Agent</div>
+            <div class="feed-card-desc">自动卡点剪辑, 音乐节奏匹配画面, 支持抖音/快手热门BGM一键同步, 让视频律动起来</div>
+            <div class="feed-card-tags">
+              <span class="feed-tag">卡点</span>
+              <span class="feed-tag">音乐</span>
+              <span class="feed-tag">节奏</span>
+            </div>
+            <div class="feed-card-footer">
+              <div class="feed-creator">
+                <div class="creator-avatar" style="background: linear-gradient(135deg, #fa709a, #fee140);">B</div>
+                <span class="creator-name">@beat_master</span>
+              </div>
+              <div class="feed-stats">
+                <span class="feed-stat">&#10084; 4.2k</span>
+                <span class="feed-stat">&#9889; 15k</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 7: 萌宠日常 -->
+        <div class="feed-card" data-category="life hot" data-type="agent">
+          <div class="feed-thumb" style="background: linear-gradient(135deg, #ffecd2, #fcb69f); height: 190px;">
+            <span class="feed-thumb-emoji">🐱</span>
+            <span class="feed-type-badge">Agent</span>
+          </div>
+          <div class="feed-body">
+            <div class="feed-card-title">萌宠日常 Pet Content Agent</div>
+            <div class="feed-card-desc">宠物照片/视频自动生成萌宠大片, 内置100+萌宠特效和字幕模板</div>
+            <div class="feed-card-tags">
+              <span class="feed-tag">萌宠</span>
+              <span class="feed-tag">猫咪</span>
+              <span class="feed-tag">狗狗</span>
+            </div>
+            <div class="feed-card-footer">
+              <div class="feed-creator">
+                <div class="creator-avatar" style="background: linear-gradient(135deg, #ffecd2, #fcb69f); color: #333;">P</div>
+                <span class="creator-name">@pet_world</span>
+              </div>
+              <div class="feed-stats">
+                <span class="feed-stat">&#10084; 5.6k</span>
+                <span class="feed-stat">&#9889; 18k</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 8: 美妆教程 -->
+        <div class="feed-card" data-category="life ecommerce" data-type="agent">
+          <div class="feed-thumb" style="background: linear-gradient(135deg, #ff9a9e, #fecfef); height: 145px;">
+            <span class="feed-thumb-emoji">💄</span>
+            <span class="feed-type-badge">Agent</span>
+          </div>
+          <div class="feed-body">
+            <div class="feed-card-title">美妆教程 Beauty Tutorial Agent</div>
+            <div class="feed-card-desc">产品图自动生成使用教程视频, 自动标注步骤和产品信息</div>
+            <div class="feed-card-tags">
+              <span class="feed-tag">美妆</span>
+              <span class="feed-tag">教程</span>
+            </div>
+            <div class="feed-card-footer">
+              <div class="feed-creator">
+                <div class="creator-avatar" style="background: linear-gradient(135deg, #ff9a9e, #fecfef); color: #333;">G</div>
+                <span class="creator-name">@glam_studio</span>
+              </div>
+              <div class="feed-stats">
+                <span class="feed-stat">&#10084; 1.5k</span>
+                <span class="feed-stat">&#9889; 4.8k</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 9: 竖屏快剪 Workflow -->
+        <div class="feed-card" data-category="video hot" data-type="workflow">
+          <div class="feed-thumb" style="background: linear-gradient(135deg, #a8edea, #fed6e3); height: 155px;">
+            <span class="feed-thumb-emoji">📱</span>
+            <span class="feed-type-badge wf-badge-type">Workflow</span>
+          </div>
+          <div class="feed-body">
+            <div class="feed-card-title">竖屏快剪 Shorts Workflow</div>
+            <div class="feed-card-desc">横屏素材一键转竖屏+字幕+配乐, 批量生产短视频, 全自动化流程</div>
+            <div class="feed-card-tags">
+              <span class="feed-tag">竖屏</span>
+              <span class="feed-tag">字幕</span>
+              <span class="feed-tag">批量</span>
+            </div>
+            <div class="feed-card-footer">
+              <div class="feed-creator">
+                <div class="creator-avatar" style="background: linear-gradient(135deg, #a8edea, #fed6e3); color: #333;">S</div>
+                <span class="creator-name">@shorts_king</span>
+              </div>
+              <div class="feed-stats">
+                <span class="feed-stat">&#10084; 6.1k</span>
+                <span class="feed-stat">&#9889; 22k</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 10: 品牌故事 Workflow -->
+        <div class="feed-card" data-category="brand" data-type="workflow">
+          <div class="feed-thumb" style="background: linear-gradient(135deg, #5ee7df, #b490ca); height: 175px;">
+            <span class="feed-thumb-emoji">🎨</span>
+            <span class="feed-type-badge wf-badge-type">Workflow</span>
+          </div>
+          <div class="feed-body">
+            <div class="feed-card-title">品牌故事 Brand Story Workflow</div>
+            <div class="feed-card-desc">品牌理念一键生成宣传片, 从文案到视觉全链路AI制作, 打造品牌专属内容</div>
+            <div class="feed-card-tags">
+              <span class="feed-tag">品牌</span>
+              <span class="feed-tag">宣传片</span>
+              <span class="feed-tag">故事</span>
+            </div>
+            <div class="feed-card-footer">
+              <div class="feed-creator">
+                <div class="creator-avatar" style="background: linear-gradient(135deg, #5ee7df, #b490ca);">B</div>
+                <span class="creator-name">@brand_lab</span>
+              </div>
+              <div class="feed-stats">
+                <span class="feed-stat">&#10084; 1.2k</span>
+                <span class="feed-stat">&#9889; 3.5k</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 11: 数据可视化 Workflow -->
+        <div class="feed-card" data-category="brand ecommerce" data-type="workflow">
+          <div class="feed-thumb" style="background: linear-gradient(135deg, #89f7fe, #66a6ff); height: 140px;">
+            <span class="feed-thumb-emoji">📊</span>
+            <span class="feed-type-badge wf-badge-type">Workflow</span>
+          </div>
+          <div class="feed-body">
+            <div class="feed-card-title">数据可视化 Data Video Workflow</div>
+            <div class="feed-card-desc">Excel/数据自动生成动态数据视频, 让枯燥数据动起来</div>
+            <div class="feed-card-tags">
+              <span class="feed-tag">数据</span>
+              <span class="feed-tag">动态图表</span>
+            </div>
+            <div class="feed-card-footer">
+              <div class="feed-creator">
+                <div class="creator-avatar" style="background: linear-gradient(135deg, #89f7fe, #66a6ff);">D</div>
+                <span class="creator-name">@data_viz</span>
+              </div>
+              <div class="feed-stats">
+                <span class="feed-stat">&#10084; 980</span>
+                <span class="feed-stat">&#9889; 2.8k</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 12: 游戏集锦 Workflow -->
+        <div class="feed-card" data-category="video life hot" data-type="workflow">
+          <div class="feed-thumb" style="background: linear-gradient(135deg, #6a11cb, #2575fc); height: 185px;">
+            <span class="feed-thumb-emoji">🎮</span>
+            <span class="feed-type-badge wf-badge-type">Workflow</span>
+          </div>
+          <div class="feed-body">
+            <div class="feed-card-title">游戏集锦 Gaming Highlight Workflow</div>
+            <div class="feed-card-desc">自动识别精彩时刻, 生成高光混剪, 支持LOL/王者/原神等热门游戏, AI自动识别击杀和操作</div>
+            <div class="feed-card-tags">
+              <span class="feed-tag">游戏</span>
+              <span class="feed-tag">高光</span>
+              <span class="feed-tag">混剪</span>
+            </div>
+            <div class="feed-card-footer">
+              <div class="feed-creator">
+                <div class="creator-avatar" style="background: linear-gradient(135deg, #6a11cb, #2575fc);">G</div>
+                <span class="creator-name">@gamer_cut</span>
+              </div>
+              <div class="feed-stats">
+                <span class="feed-stat">&#10084; 3.8k</span>
+                <span class="feed-stat">&#9889; 11k</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 13: 穿搭展示 Agent -->
+        <div class="feed-card" data-category="life ecommerce" data-type="agent">
+          <div class="feed-thumb" style="background: linear-gradient(135deg, #f6d365, #fda085); height: 165px;">
+            <span class="feed-thumb-emoji">👗</span>
+            <span class="feed-type-badge">Agent</span>
+          </div>
+          <div class="feed-body">
+            <div class="feed-card-title">穿搭展示 Fashion Lookbook Agent</div>
+            <div class="feed-card-desc">服装照片生成时尚大片+动态展示, 自动搭配场景和风格滤镜</div>
+            <div class="feed-card-tags">
+              <span class="feed-tag">穿搭</span>
+              <span class="feed-tag">时尚</span>
+              <span class="feed-tag">大片</span>
+            </div>
+            <div class="feed-card-footer">
+              <div class="feed-creator">
+                <div class="creator-avatar" style="background: linear-gradient(135deg, #f6d365, #fda085); color: #333;">S</div>
+                <span class="creator-name">@style_ai</span>
+              </div>
+              <div class="feed-stats">
+                <span class="feed-stat">&#10084; 2.1k</span>
+                <span class="feed-stat">&#9889; 6.7k</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 14: 健身打卡 Agent -->
+        <div class="feed-card" data-category="life" data-type="agent">
+          <div class="feed-thumb" style="background: linear-gradient(135deg, #30cfd0, #330867); height: 150px;">
+            <span class="feed-thumb-emoji">🏋️</span>
+            <span class="feed-type-badge">Agent</span>
+          </div>
+          <div class="feed-body">
+            <div class="feed-card-title">健身打卡 Fitness Content Agent</div>
+            <div class="feed-card-desc">运动数据+视频自动生成健身日志, 记录每一次突破</div>
+            <div class="feed-card-tags">
+              <span class="feed-tag">健身</span>
+              <span class="feed-tag">打卡</span>
+            </div>
+            <div class="feed-card-footer">
+              <div class="feed-creator">
+                <div class="creator-avatar" style="background: linear-gradient(135deg, #30cfd0, #330867);">F</div>
+                <span class="creator-name">@fit_daily</span>
+              </div>
+              <div class="feed-stats">
+                <span class="feed-stat">&#10084; 1.3k</span>
+                <span class="feed-stat">&#9889; 4.1k</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Page: Home / 创作中心 -->
-    <div class="page active" id="page-home">
+    <div class="page" id="page-home">
       <div class="home-container">
         <!-- Hero Intent Input -->
         <div class="hero-section">

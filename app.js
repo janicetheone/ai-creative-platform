@@ -104,6 +104,56 @@ function switchWfTab(btn, tabId) {
 
 // === Agent Detail (placeholder) ===
 function openAgentDetail(agentId) {
-  // Could expand to a detail modal/page
   console.log('Open agent:', agentId);
+}
+
+// === Discover Page: Category Filter ===
+function filterCategory(btn, category) {
+  document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+
+  const cards = document.querySelectorAll('.feed-card');
+  cards.forEach(card => {
+    if (category === 'all') {
+      card.classList.remove('hidden');
+    } else {
+      const cats = card.getAttribute('data-category') || '';
+      if (cats.includes(category)) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    }
+  });
+}
+
+// === Discover Page: Search Filter ===
+function filterFeedCards() {
+  const query = document.getElementById('discoverSearch').value.trim().toLowerCase();
+  const cards = document.querySelectorAll('.feed-card');
+  cards.forEach(card => {
+    if (!query) {
+      card.classList.remove('hidden');
+      return;
+    }
+    const text = card.textContent.toLowerCase();
+    if (text.includes(query)) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+}
+
+// === Discover Page: Quick Create from top bar ===
+function discoverStartCreate() {
+  const input = document.getElementById('discoverIntentInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  // Switch to home/create page and fill in the intent
+  switchPage('home');
+  document.getElementById('intentInput').value = text;
+  input.value = '';
+  submitIntent();
 }
